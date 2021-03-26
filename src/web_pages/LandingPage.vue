@@ -2,12 +2,12 @@
     <div class="wrapper landing-page">
         <div class="page-header page-header-small">
             <parallax class="page-header-image"
-                 style="background-image: url('img/bg26.jpg')">
+                 style="background-image: url('img/artificial-intelligence-robots-cyborg-with-infinity-symbol.jpg')">
             </parallax>
             <div class="content-center">
                 <h1 class="title">Chat with AI</h1>
                 <h3>Anything, Anytime, Anywhere.</h3>
-                <div class="text-center">
+                <!-- <div class="text-center">
                     <a href="#pablo" class="btn btn-primary btn-icon  btn-round">
                         <i class="fab fa-facebook-square"></i>
                     </a>
@@ -17,7 +17,7 @@
                     <a href="#pablo" class="btn btn-primary btn-icon btn-round">
                         <i class="fab fa-google-plus"></i>
                     </a>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="section section-about-us">
