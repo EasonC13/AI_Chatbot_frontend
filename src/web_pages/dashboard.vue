@@ -1,12 +1,12 @@
 <template>
-    <div class="wrapper landing-page">
-        <div class="page-header page-header-small">
+    <div class="wrapper dashboard-page">
+        <div class="page-header dashboard-header">
             <parallax class="page-header-image"
                 style="background-image: url('img/artificial-intelligence-robots-cyborg-with-infinity-symbol.jpg')">
             </parallax>
             <div class="content-center">
                 <h1 class="title">Dashboard</h1>
-                <h3>Manage Your Chatroom and Chatbot Here.</h3>
+                <h3>Manage Your Chatroom and Chatbot</h3>
             </div>
         </div>
         <div class="overview-block container align-items-center">
@@ -100,4 +100,6 @@
     font-size:18px;
     margin-top:8px
     }
+
+    
 </style>
