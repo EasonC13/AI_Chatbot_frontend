@@ -8,43 +8,47 @@
                 <h1 class="title">Dashboard</h1>
                 <h3>Manage Your Chatroom and Chatbot Here.</h3>
             </div>
-            
-            
         </div>
         <div class="overview-block container align-items-center">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-4">
-                        <div class="card badge-block">
-                            <i class="fas fa-list"></i>
-                            <p class="badge-block__title">Messages Recieve</p>
-                            <p v-text="'2560'"></p>
-                        </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="card badge-block">
+                        <i class="fas fa-list"></i>
+                        <p class="badge-block__title">Messages Recieve</p>
+                        <p v-text="'2560'"></p>
                     </div>
-            <div class="col-xs-12 col-sm-12 col-md-4"><div class="card badge-block">
-            <i class="fas fa-check-square"></i>
-            <p class="badge-block__title">Messages Send</p>
-            <p v-text="'521'"></p>
-            </div></div>
-            <div class="col-xs-12 col-sm-12 col-md-4"><div class="card badge-block">
-            <i class="far fa-calendar-alt"></i>
-            <p class="badge-block__title">Own Bots</p>
-            <p v-text="'5'"></p>
-            </div></div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="card badge-block">
+                        <i class="fas fa-check-square"></i>
+                        <p class="badge-block__title">Messages Send</p>
+                        <p v-text="'521'"></p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="card badge-block">
+                        <i class="far fa-calendar-alt"></i>
+                        <p class="badge-block__title">Own Bots</p>
+                        <p v-text="'5'"></p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="container">
-            <ul role="tablist" class="nav nav-tabs justify-content-center" id="dashboard-nav">
-                <li class="nav-item"><a data-toggle="tab" href="#/dashboard/my_chats" role="tab" class="nav-link" aria-selected="true">My Chats</a></li>
-                <li class="nav-item"><a data-toggle="tab" href="#/dashboard/my_bots" role="tab" class="nav-link" aria-selected="true">My Bots</a></li>
+            <ul role="tablist" class="nav justify-content-center row" id="dashboard-nav">
+                <li class="nav-item"><a data-toggle="tab" href="#/dashboard#my_chats" role="tab" class="nav-link" aria-selected="true">My Chats</a></li>
+                <li class="nav-item"><a data-toggle="tab" href="#/dashboard#my_bots" role="tab" class="nav-link" aria-selected="true">My Bots</a></li>
             </ul>
-            <router-view></router-view>
+            <myChats v-if="$route.hash=='#my_chats'"></myChats>
+            <myBots v-if="$route.hash=='#my_bots'"></myBots>
         </div>
     </div>
 </template>
 
 <script>
   import { Card, Button, FormGroupInput, Tabs, TabPane } from '@/components';
-
+    import myBots from "./myBots.vue"
+    import myChats from "./myChats.vue"
   export default {
     name: 'dashboard',
     bodyClass: 'dashboard',
@@ -53,7 +57,8 @@
       Tabs,
       TabPane,
       [Button.name]: Button,
-      [FormGroupInput.name]: FormGroupInput
+      [FormGroupInput.name]: FormGroupInput,
+      myBots, myChats
     },
     data() {
       return {
@@ -63,7 +68,12 @@
           message: ''
         }
       }
-    }
+    },
+    methods: {
+        check: function(){
+            console.log(this.$route)
+        }
+    },
   }
 </script>
 <style>
@@ -72,6 +82,8 @@
 } */
 #dashboard-nav > li > a {
     font-size: 200%;
+    display:inline-table;
+    color: black;
 }
 .overview-block{
     margin:30px auto;

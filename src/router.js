@@ -34,16 +34,6 @@ const router = new Router({
       path: "/dashboard",
       name: "dashboard",
       components: {default: Dashboard, header: MainNavbar, footer: MainFooter},
-      children:[
-        {
-          path: "my_chats",
-          component: myChats,
-        },
-        {
-          path: "my_bots",
-          component: myBots,
-        },
-      ],
       props: {
         footer: {backgroundColor: 'black'},
         header: {colorOnScroll: 65}
