@@ -18,19 +18,22 @@
         </template>
         <template slot="navbar-menu">
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)" onclick="scrollToDownload()">
+                <a class="nav-link" href="/#/home" onclick="scrollToDownload()">
                 <i class="now-ui-icons objects_globe"></i>
                 <p>Home</p>
                 </a>
             </li>
             
             <drop-down tag="li" title="Dashboard" icon="now-ui-icons tech_tv" class="nav-item">
-                <nav-link to="/components">
+                <li class="nav-item">
+                    <nav-link to="/dashboard">
                     <i class="now-ui-icons ui-1_send"></i> My Chats
                 </nav-link>
-                <a href="https://demos.creative-tim.com/vue-now-ui-kit-pro/documentation" target="_blank" class="dropdown-item">
-                    <i class="now-ui-icons design_bullet-list-67"></i> My Bots
-                </a>
+                </li>
+                
+                <nav-link to="/dashboard">
+                    <i class="now-ui-icons ui-1_send"></i> My Bots
+                </nav-link>
             </drop-down>
         </template>
 
@@ -52,9 +55,9 @@
                 <nav-link to="/components">
                     <i class="now-ui-icons users_circle-08"></i>My Account
                 </nav-link>
-                <a href="https://demos.creative-tim.com/vue-now-ui-kit-pro/documentation" target="_blank" class="dropdown-item">
+                <nav-link to="/components">
                     <i class="now-ui-icons ui-1_settings-gear-63"></i> Perference
-                </a>
+                </nav-link>
             </drop-down>
             <li class="nav-item">
                 <div class="nav-link">

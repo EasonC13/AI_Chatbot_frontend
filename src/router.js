@@ -18,6 +18,7 @@ import SignUpPage from "./pages/example-pages/SignUpPage.vue";
 import Sections from "./pages/Sections.vue";
 
 import Dashboard from "./web_pages/dashboard.vue"
+import HomePage from "./web_pages/LandingPage.vue"
 
 Vue.use(Router);
 
@@ -25,12 +26,21 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      redirect: "/dashbaord"
+      redirect: "/dashboard"
     },
     {
-      path: "/dashbaord",
+      path: "/dashboard",
       name: "dashboard",
       components: {default: Dashboard, header: MainNavbar, footer: MainFooter},
+      props: {
+        footer: {backgroundColor: 'black'},
+        header: {colorOnScroll: 65}
+      }
+    },
+    {
+      path: "/home",
+      name: "home",
+      components: {default: HomePage, header: MainNavbar, footer: MainFooter},
       props: {
         footer: {backgroundColor: 'black'},
         header: {colorOnScroll: 65}
