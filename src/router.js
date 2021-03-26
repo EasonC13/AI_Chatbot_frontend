@@ -19,6 +19,8 @@ import Sections from "./pages/Sections.vue";
 
 import Dashboard from "./web_pages/dashboard.vue"
 import HomePage from "./web_pages/LandingPage.vue"
+import myBots from "./web_pages/myBots.vue"
+import myChats from "./web_pages/myChats.vue"
 
 Vue.use(Router);
 
@@ -32,6 +34,16 @@ const router = new Router({
       path: "/dashboard",
       name: "dashboard",
       components: {default: Dashboard, header: MainNavbar, footer: MainFooter},
+      children:[
+        {
+          path: "my_chats",
+          component: myChats,
+        },
+        {
+          path: "my_bots",
+          component: myBots,
+        },
+      ],
       props: {
         footer: {backgroundColor: 'black'},
         header: {colorOnScroll: 65}

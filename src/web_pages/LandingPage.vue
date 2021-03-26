@@ -284,8 +284,8 @@
   import { Card, Button, FormGroupInput, Tabs, TabPane } from '@/components';
 
   export default {
-    name: 'dashboard',
-    bodyClass: 'dashboard',
+    name: 'homepage',
+    bodyClass: 'homepage',
     components: {
       Card,
       Tabs,
