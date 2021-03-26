@@ -30,18 +30,23 @@
     
     <!-- Google Auth Plugins -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script>
-      function init() {
-        gapi.load('auth2', function() {
-          /* Ready. Make a call to gapi.auth2.init or some other API */
-        });
+      function initGAPI() {
+        if(window.gapi){
+          const event = new Event('gapi-loaded');
+          window.dispatchEvent(event);
+          window.gapi = gapi;
+        }
+        // gapi.load('auth2', function() {
+        //   /* Ready. Make a call to gapi.auth2.init or some other API */
+        // }); 
       }
     </script>
-    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
-    <meta name="google-signin-client_id" content="464553029429-nbpl3srfbtajegsktvadfcg2t0lsa1p7.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js?onload=initGAPI" async defer></script>
+    <meta name="google-signin-client_id" content="464553029429-g8o9spmetb9poejg9ipukbstqj5ccc43.apps.googleusercontent.com">
 
   </head>
   <body>

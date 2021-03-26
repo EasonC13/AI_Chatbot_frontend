@@ -4,113 +4,71 @@
             :color-on-scroll="colorOnScroll"
             menu-classes="ml-auto">
         <template slot-scope="{toggle, isToggled}">
-                <router-link v-popover:popover1 class="navbar-brand" to="/presentation">
+                <router-link v-popover:popover1 class="navbar-brand" to="/">
                     AI Chatbot Dashboard
                 </router-link>
-                <el-popover
+                <!-- <el-popover
                         ref="popover1"
                         popper-class="popover"
                         placement="bottom"
                         width="200"
                         trigger="hover">
                     <div class="popover-body">Create by EasonC13</div>
-                </el-popover>
+                </el-popover> -->
         </template>
         <template slot="navbar-menu">
             <li class="nav-item">
-                <!-- <div class="g-signin2 nav-link btn btn-primary" data-onsuccess="onSignIn">
-                    <p>Login</p>
-                </div>
-                <div class="nav-link btn btn-primary" @click="Hi">
-                    <p>GGG</p>
-                </div> -->
-                <div id="google-signin-btn"></div>
-                <a href="#" @click="signOut();">Sign out</a>
+                <a class="nav-link" href="javascript:void(0)" onclick="scrollToDownload()">
+                <i class="now-ui-icons arrows-1_cloud-download-93"></i>
+                <p>Home</p>
+                </a>
             </li>
-            <div></div>
-        </template>
-        <!-- <template slot="navbar-menu">
-            <drop-down tag="li" title="Components" icon="now-ui-icons design_app" class="nav-item">
+            
+            <drop-down tag="li" title="Dashboard" icon="now-ui-icons design_app" class="nav-item">
                 <nav-link to="/components">
-                    <i class="now-ui-icons business_chart-pie-36"></i> Components
+                    <i class="now-ui-icons business_chart-pie-36"></i> My Chats
                 </nav-link>
                 <a href="https://demos.creative-tim.com/vue-now-ui-kit-pro/documentation" target="_blank" class="dropdown-item">
-                    <i class="now-ui-icons design_bullet-list-67"></i> Documentation
+                    <i class="now-ui-icons design_bullet-list-67"></i> My Bots
                 </a>
             </drop-down>
-            <drop-down tag="li" title="sections" icon="now-ui-icons files_paper" class="nav-item">
-                <nav-link class="dropdown-item" to="/sections#headers">
-                    <i class="now-ui-icons shopping_box"></i> Headers
-                </nav-link>
-                <nav-link class="dropdown-item" to="/sections#features">
-                    <i class="now-ui-icons ui-2_settings-90"></i> Features
-                </nav-link>
-                <nav-link class="dropdown-item" to="/sections#blogs">
-                    <i class="now-ui-icons text_align-left"></i> Blogs
-                </nav-link>
-                <nav-link class="dropdown-item" to="/sections#teams">
-                    <i class="now-ui-icons sport_user-run"></i> Teams
-                </nav-link>
-                <nav-link class="dropdown-item" to="/sections#projects">
-                    <i class="now-ui-icons education_paper"></i> Projects
-                </nav-link>
-                <nav-link class="dropdown-item" to="/sections#pricing">
-                    <i class="now-ui-icons business_money-coins"></i> Pricing
-                </nav-link>
-                <nav-link class="dropdown-item" to="/sections#testimonials">
-                    <i class="now-ui-icons ui-2_chat-round"></i> Testimonials
-                </nav-link>
-                <nav-link class="dropdown-item" to="/sections#contactus">
-                    <i class="now-ui-icons tech_mobile"></i> Contact Us
-                </nav-link>
-            </drop-down>
+        </template>
 
-            <drop-down tag="li" title="Examples" icon="now-ui-icons design_image" class="nav-item">
-                <nav-link to="/about">
-                    <i class="now-ui-icons business_bulb-63"></i> About-us
+        <template slot="navbar-menu">
+            <!-- <li class="nav-item">
+                <div class="g-signin2 nav-link" data-onsuccess="onSignIn">
+                    <p>Login</p>
+                </div>
+            </li> -->
+            <li class="nav-item QQQ" v-show="user == undefined">
+                <div id="google-signin-btn" class="nav-link">
+                </div>
+            </li>
+        </template>
+        <template slot="navbar-menu" v-if="user != undefined">
+                      
+            <drop-down tag="li" :title="'Welcome '+this.user.getBasicProfile().getEmail()"
+            icon="now-ui-icons design_app" class="nav-item lower">
+                <nav-link to="/components">
+                    <i class="now-ui-icons business_chart-pie-36"></i> My Account
                 </nav-link>
-                <nav-link to="/blog-post">
-                    <i class="now-ui-icons text_align-left"></i> Blog Post
-                </nav-link>
-                <nav-link class="dropdown-item" to="/blog-posts">
-                    <i class="now-ui-icons design_bullet-list-67"></i> Blog Posts
-                </nav-link>
-                <nav-link class="dropdown-item" to="/contact">
-                    <i class="now-ui-icons location_pin"></i> Contact Us
-                </nav-link>
-                <nav-link class="dropdown-item" to="/landing">
-                    <i class="now-ui-icons education_paper"></i> Landing Page
-                </nav-link>
-                <nav-link class="dropdown-item" to="/login">
-                    <i class="now-ui-icons users_circle-08"></i> Login Page
-                </nav-link>
-                <nav-link class="dropdown-item" to="/pricing">
-                    <i class="now-ui-icons business_money-coins"></i> Pricing
-                </nav-link>
-                <nav-link class="dropdown-item" to="/ecommerce">
-                    <i class="now-ui-icons shopping_shop"></i> Ecommerce Page
-                </nav-link>
-                <nav-link class="dropdown-item" to="/product">
-                    <i class="now-ui-icons shopping_bag-16"></i> Product Page
-                </nav-link>
-                <nav-link class="dropdown-item" to="/profile">
-                    <i class="now-ui-icons users_single-02"></i> Profile Page
-                </nav-link>
-                <nav-link class="dropdown-item" to="/signup">
-                    <i class="now-ui-icons tech_mobile"></i> Signup Page
-                </nav-link>
+                <a href="https://demos.creative-tim.com/vue-now-ui-kit-pro/documentation" target="_blank" class="dropdown-item">
+                    <i class="now-ui-icons design_bullet-list-67"></i> Perference
+                </a>
             </drop-down>
             <li class="nav-item">
-                <a class="nav-link btn btn-primary"
-                   href="https://www.creative-tim.com/product/vue-now-ui-kit-pro" target="_blank">
-                    <p>Buy Now</p>
-                </a>
+                <div class="nav-link">
+                    <a href="#" @click="onSignOut();">Sign out</a>
+                </div>
             </li>
-
-        </template> -->
+        </template>
     </navbar>
 </template>
-
+<style>
+.lower{
+    text-transform: none;
+}
+</style>
 <script>
   import { DropDown, NavbarToggleButton, Navbar, NavLink } from '@/components';
   import { Popover } from 'element-ui'
@@ -120,6 +78,22 @@
       transparent: Boolean,
       colorOnScroll: Number,
     },
+    data: function(){
+        return {
+            window: window,
+            user: undefined,
+            not_login: true,
+        }
+    },
+    computed: {
+        userEmail: function(){
+            if(this.user.getEmail){
+                return this.user.getEmail()
+            }
+            console.log("UUU",this.user)
+            return ""
+        }
+    },
     components: {
       DropDown,
       Navbar,
@@ -128,23 +102,38 @@
       [Popover.name]: Popover
     },
     mounted() {
-        gapi.signin2.render('google-signin-btn', { // this is the button "id"
-        onsuccess: this.onSignIn // note, no "()" here
-        })
+        
+    },
+    created() {
+        window.addEventListener('gapi-loaded', this.mount_google_sign_in);
+    },
+    beforeDestroy() {
+        window.removeEventListener('gapi-loaded', this.mount_google_sign_in);
     },
     methods:{
-        onSignIn(googleUser) {
+        mount_google_sign_in(){
+            gapi.signin2.render('google-signin-btn', { // this is the button "id"
+                onsuccess: this.onSignIn // note, no "()" here
+            })
+        },
+        Hi(){
+            console.log(gapi)
+            
+        },
+        onSignIn(googleUser){
+            window.user = googleUser
+            this.user = googleUser
+            console.log(this.not_login)
             var profile = googleUser.getBasicProfile();
             console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
             console.log('Name: ' + profile.getName());
             console.log('Image URL: ' + profile.getImageUrl());
             console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
         },
-        Hi(){
-            console.log(gapi)
-        },
-        signOut() {
+        onSignOut(){
             var auth2 = gapi.auth2.getAuthInstance();
+            this.user = undefined;
+            window.user = undefined;
             auth2.signOut().then(function () {
             console.log('User signed out.');
             });
