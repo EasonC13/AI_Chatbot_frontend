@@ -19,14 +19,14 @@
         <template slot="navbar-menu">
             <li class="nav-item">
                 <a class="nav-link" href="javascript:void(0)" onclick="scrollToDownload()">
-                <i class="now-ui-icons arrows-1_cloud-download-93"></i>
+                <i class="now-ui-icons objects_globe"></i>
                 <p>Home</p>
                 </a>
             </li>
             
-            <drop-down tag="li" title="Dashboard" icon="now-ui-icons design_app" class="nav-item">
+            <drop-down tag="li" title="Dashboard" icon="now-ui-icons tech_tv" class="nav-item">
                 <nav-link to="/components">
-                    <i class="now-ui-icons business_chart-pie-36"></i> My Chats
+                    <i class="now-ui-icons ui-1_send"></i> My Chats
                 </nav-link>
                 <a href="https://demos.creative-tim.com/vue-now-ui-kit-pro/documentation" target="_blank" class="dropdown-item">
                     <i class="now-ui-icons design_bullet-list-67"></i> My Bots
@@ -40,20 +40,20 @@
                     <p>Login</p>
                 </div>
             </li> -->
-            <li class="nav-item QQQ" v-show="user == undefined">
+            <li class="nav-item" v-show="user == undefined">
                 <div id="google-signin-btn" class="nav-link">
                 </div>
             </li>
         </template>
         <template slot="navbar-menu" v-if="user != undefined">
                       
-            <drop-down tag="li" :title="'Welcome '+this.user.getBasicProfile().getEmail()"
-            icon="now-ui-icons design_app" class="nav-item lower">
+            <drop-down tag="li" :title="' Welcome '+this.user.getBasicProfile().getEmail()"
+            icon="now-ui-icons users_single-02" class="nav-item lower">
                 <nav-link to="/components">
-                    <i class="now-ui-icons business_chart-pie-36"></i> My Account
+                    <i class="now-ui-icons users_circle-08"></i>My Account
                 </nav-link>
                 <a href="https://demos.creative-tim.com/vue-now-ui-kit-pro/documentation" target="_blank" class="dropdown-item">
-                    <i class="now-ui-icons design_bullet-list-67"></i> Perference
+                    <i class="now-ui-icons ui-1_settings-gear-63"></i> Perference
                 </a>
             </drop-down>
             <li class="nav-item">
