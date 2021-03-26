@@ -18,14 +18,9 @@
         </template>
         <template slot="navbar-menu">
             <li class="nav-item">
-                <!-- <div class="g-signin2 nav-link btn btn-primary" data-onsuccess="onSignIn">
+                <div class="g-signin2 nav-link btn btn-primary" data-onsuccess="onSignIn">
                     <p>Login</p>
                 </div>
-                <div class="nav-link btn btn-primary" @click="Hi">
-                    <p>GGG</p>
-                </div> -->
-                <div id="google-signin-btn"></div>
-                <a href="#" @click="signOut();">Sign out</a>
             </li>
             <div></div>
         </template>
@@ -126,29 +121,6 @@
       NavbarToggleButton,
       NavLink,
       [Popover.name]: Popover
-    },
-    mounted() {
-        gapi.signin2.render('google-signin-btn', { // this is the button "id"
-        onsuccess: this.onSignIn // note, no "()" here
-        })
-    },
-    methods:{
-        onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-        },
-        Hi(){
-            console.log(gapi)
-        },
-        signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-            console.log('User signed out.');
-            });
-        }
     }
   }
 </script>
