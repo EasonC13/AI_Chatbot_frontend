@@ -6,39 +6,44 @@
                     <card class="card-plain">
                         <div class="row">
                             <div class="col-sm-12">
-                                <el-table :data="tableData">
-                                    <el-table-column min-width="50" type="index"></el-table-column>
-                                    <el-table-column min-width="150"
-                                                        align="left"
-                                                        prop="name"
-                                                        label="Name">
-                                    </el-table-column>
-                                    <el-table-column min-width="200"
-                                                        prop="job"
-                                                        align="left"
-                                                        label="Job Position">
-                                    </el-table-column>
-                                    <el-table-column min-width="150"
-                                                        prop="salary"
-                                                        align="left"
-                                                        label="Salary">
-                                    </el-table-column>
-                                    <el-table-column min-width="150"
-                                                        header-align="right"
-                                                        label="Actions">
-                                        <div slot-scope="{row}" class="text-right table-actions">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">First</th>
+                                        <th scope="col">Last</th>
+                                        <th scope="col">Handle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">3</th>
+                                        <td colspan="2">Larry the Bird</td>
+                                        <td>
                                             <el-tooltip content="Info"
                                                         :open-delay="300"
-                                                        placement="top">
-                                                <n-button type="info" size="sm" icon>
-                                                    <i class="now-ui-icons users_single-02"></i>
+                                                        placement="top" effect="white">
+                                                <n-button type="info" size="sm" icon @click.native="Hi">
+                                                    <i class="now-ui-icons users_single-02" ></i>
                                                 </n-button>
                                             </el-tooltip>
 
 
                                             <el-tooltip content="Settings"
                                                         :open-delay="300"
-                                                        placement="top">
+                                                        placement="top" effect="white">
                                                 <n-button type="success" size="sm" icon>
                                                     <i class="now-ui-icons ui-2_settings-90"></i>
                                                 </n-button>
@@ -46,15 +51,14 @@
 
                                             <el-tooltip content="Delete"
                                                         :open-delay="300"
-                                                        placement="top">
+                                                        placement="top" effect="white">
                                                 <n-button type="danger" size="sm" icon>
                                                     <i class="now-ui-icons ui-1_simple-remove"></i>
                                                 </n-button>
-                                            </el-tooltip>
-
-                                        </div>
-                                    </el-table-column>
-                                </el-table>
+                                            </el-tooltip></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </card>
@@ -65,7 +69,7 @@
 </template>
 <script>
 import {Card, Button, Checkbox, Comment, FormGroupInput, Pagination} from '@/components';
-import {Table, TableColumn, Tooltip} from 'element-ui';
+import {Table, TableColumn, Tooltip, Popover} from 'element-ui';
 export default {
     name: 'myChats',
     bodyClass: 'myChats',
@@ -75,6 +79,7 @@ export default {
             [TableColumn.name]: TableColumn,
             [Tooltip.name]: Tooltip,
             [Checkbox.name]: Checkbox,
+            [Popover.name]: Popover,
             [Button.name]: Button,
             [FormGroupInput.name]: FormGroupInput,
             [Pagination.name]: Pagination,
@@ -111,12 +116,18 @@ export default {
                 }
             ],
         }
+    },
+    methods:{
+        Hi: function(e){
+            console.log("Hi", e)
+        }
     }
 }
 </script>
-<style lang="">
-
-    /* .el-tooltip {
-        color :white;
-    } */
+<style>
+.draw_share_atooltip{
+    color: red;
+}
 </style>
+
+
