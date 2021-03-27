@@ -57,34 +57,63 @@
                                                 </n-button>
                                             </el-tooltip></td>
                                         </tr>
+                                        <tr>
+                                            <th scope="row">-</th>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>
+                                                <div>
+                                                    <div>
+                                                        <b-button v-b-toggle.collapse-1 variant="success">Add New Bot</b-button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
+                                <b-collapse id="collapse-1" class="mt-2">
+                                    <b-card>
+                                    <p class="card-text">Collapse contents Here</p>
+                                    <b-button v-b-toggle.collapse-1-inner size="sm">Toggle Inner Collapse</b-button>
+                                    <b-collapse id="collapse-1-inner" class="mt-2">
+                                        <b-card>Hello!</b-card>
+                                    </b-collapse>
+                                    </b-card>
+                                </b-collapse>
                             </div>
                         </div>
                     </card>
                 </div>
             </div>
         </div>
+        
     </div>
 </template>
 <script>
 import {Card, Button, Checkbox, Comment, FormGroupInput, Pagination} from '@/components';
 import {Table, TableColumn, Tooltip, Popover} from 'element-ui';
+import { BButton, BCard, BCollapse, VBToggle} from 'bootstrap-vue'
 export default {
     name: 'myChats',
     bodyClass: 'myChats',
     components: {
-            Card,
-            [Table.name]: Table,
-            [TableColumn.name]: TableColumn,
-            [Tooltip.name]: Tooltip,
-            [Checkbox.name]: Checkbox,
-            [Popover.name]: Popover,
-            [Button.name]: Button,
-            [FormGroupInput.name]: FormGroupInput,
-            [Pagination.name]: Pagination,
-            Comment
+        BButton,
+        BCard,
+        BCollapse,
+        Card,
+        [Table.name]: Table,
+        [TableColumn.name]: TableColumn,
+        [Tooltip.name]: Tooltip,
+        [Checkbox.name]: Checkbox,
+        [Popover.name]: Popover,
+        [Button.name]: Button,
+        [FormGroupInput.name]: FormGroupInput,
+        [Pagination.name]: Pagination,
+        Comment
         },
+    directives:{
+      'b-toggle': VBToggle,
+    },
     data() {
         return {
             tableData: [{
