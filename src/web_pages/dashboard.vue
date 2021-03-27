@@ -39,7 +39,7 @@
                 <li class="nav-item"><a data-toggle="tab" href="#/dashboard#my_chats" role="tab" class="nav-link" aria-selected="true">My Chats</a></li>
                 <li class="nav-item"><a data-toggle="tab" href="#/dashboard#my_bots" role="tab" class="nav-link" aria-selected="true">My Bots</a></li>
             </ul>
-            <myChats v-if="$route.hash=='#my_chats'"></myChats>
+            <myChats v-if="$route.hash=='#my_chats' | $route.hash==''"></myChats>
             <myBots v-if="$route.hash=='#my_bots'"></myBots>
         </div>
     </div>
