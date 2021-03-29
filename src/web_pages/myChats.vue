@@ -10,52 +10,48 @@
                                     <thead>
                                         <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
+                                        <th scope="col">Picture</th>
+                                        <th scope="col">Display Name</th>
+                                        <th scope="col">Username</th>
                                         <th scope="col">Handle</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">3</th>
-                                        <td colspan="2">Larry the Bird</td>
-                                        <td>
-                                            <el-tooltip content="Info"
-                                                        :open-delay="300"
-                                                        placement="top" effect="white">
-                                                <n-button type="info" size="sm" icon @click.native="Hi">
-                                                    <i class="now-ui-icons users_single-02" ></i>
-                                                </n-button>
-                                            </el-tooltip>
+                                        <tr v-for="(item, index) in bots_list" :key="index">
+                                            <th scope="row">{{index}}</th>
+                                            <th scope="row">
+                                                <img class="profile_img" 
+                                                :src="get_b64_encoded_img(item['profile_pic'])" 
+                                                alt="Picture" />
+                                            </th>
+                                            <td>{{item["display_name"]}}</td>
+                                            <td>{{item["tg_username"]}}</td>
+                                            <td>
+                                                <el-tooltip content="More Info"
+                                                            :open-delay="300"
+                                                            placement="top" effect="white">
+                                                    <n-button type="info" size="sm" icon @click.native="Hi">
+                                                        <i class="now-ui-icons users_single-02" ></i>
+                                                    </n-button>
+                                                </el-tooltip>
 
 
-                                            <el-tooltip content="Settings"
-                                                        :open-delay="300"
-                                                        placement="top" effect="white">
-                                                <n-button type="success" size="sm" icon>
-                                                    <i class="now-ui-icons ui-2_settings-90"></i>
-                                                </n-button>
-                                            </el-tooltip>
+                                                <el-tooltip content="Settings"
+                                                            :open-delay="300"
+                                                            placement="top" effect="white">
+                                                    <n-button type="success" size="sm" icon>
+                                                        <i class="now-ui-icons ui-2_settings-90"></i>
+                                                    </n-button>
+                                                </el-tooltip>
 
-                                            <el-tooltip content="Delete"
-                                                        :open-delay="300"
-                                                        placement="top" effect="white">
-                                                <n-button type="danger" size="sm" icon>
-                                                    <i class="now-ui-icons ui-1_simple-remove"></i>
-                                                </n-button>
-                                            </el-tooltip></td>
+                                                <el-tooltip content="Remove"
+                                                            :open-delay="300"
+                                                            placement="top" effect="white">
+                                                    <n-button type="danger" size="sm" icon>
+                                                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                    </n-button>
+                                                </el-tooltip>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">-</th>
@@ -93,6 +89,7 @@
 import {Card, Button, Checkbox, Comment, FormGroupInput, Pagination} from '@/components';
 import {Table, TableColumn, Tooltip, Popover} from 'element-ui';
 import { BButton, BCard, BCollapse, VBToggle} from 'bootstrap-vue'
+const axios = require('axios');
 export default {
     name: 'myChats',
     bodyClass: 'myChats',
@@ -114,41 +111,45 @@ export default {
     directives:{
       'b-toggle': VBToggle,
     },
+    created() {
+        if(window.user == undefined){
+            window.addEventListener('gapi-user-loaded', this.gapi_user_load);
+        }else{
+            this.gapi_user_load()
+        }
+        
+    },
+    beforeDestroy() {
+        window.removeEventListener('gapi-user-loaded', this.gapi_user_load);
+    },
+    mounted: async function(){
+    },
     data() {
         return {
-            tableData: [{
-                name: 'Andrew Mike',
-                job: 'Develop',
-                salary: '€ 99,225',
-                active: false
-            }, {
-                name: 'John Doe',
-                job: 'Design',
-                salary: '€ 89,241',
-                active: false
-            }, {
-                name: 'Alex Mike',
-                job: 'Design',
-                salary: '€ 92,144',
-                active: false
-            }, {
-                name: 'Mike Monday',
-                job: 'Marketing',
-                salary: '€ 49,990',
-                active: true
-            },
-                {
-                    name: 'Paul dickens',
-                    job: 'Communication',
-                    salary: '€ 69,201',
-                    active: true
-                }
-            ],
+            bots_list: []
         }
     },
     methods:{
+        gapi_user_load: async function(){
+            console.log("WINDOW", window)
+            console.log("USER", window.user)
+            window.axios = axios
+            let user_email = window.user.getBasicProfile().getEmail()
+            console.log("EMEMEM" , user_email)
+            axios.get(`https://chatbot.eason.tw/api/v1/get/avaliable_bots?user_email=${user_email}`)
+                .then(response => {
+                    console.log(response.data)
+                    this.bots_list = response.data
+                    
+                })
+
+        },
         Hi: function(e){
             console.log("Hi", e)
+        },
+        get_b64_encoded_img: function(code){
+            let b64_prefix = "data:image/png;base64, "
+            return b64_prefix + code
         }
     }
 }
@@ -156,6 +157,10 @@ export default {
 <style>
 .draw_share_atooltip{
     color: red;
+}
+
+.profile_img{
+    height: 3em
 }
 </style>
 
