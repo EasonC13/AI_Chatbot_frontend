@@ -53,14 +53,19 @@
                                                 </el-tooltip>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr @click="trigger_add_new_bot">
                                             <th scope="row">-</th>
+                                            <td>-</td>
                                             <td>-</td>
                                             <td>-</td>
                                             <td>
                                                 <div>
                                                     <div>
-                                                        <b-button v-b-toggle.collapse-1 variant="success">Add New Bot</b-button>
+                                                        <b-button
+                                                            v-b-toggle.collapse-1
+                                                            variant="success"
+                                                            id="add_new_bot_button" v-show="false"></b-button>
+                                                        <button class="btn btn-success">Add Bot</button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -144,8 +149,8 @@ export default {
                 })
 
         },
-        Hi: function(e){
-            console.log("Hi", e)
+        trigger_add_new_bot: function(){
+            document.getElementById("add_new_bot_button").click()
         },
         get_b64_encoded_img: function(code){
             let b64_prefix = "data:image/png;base64, "
