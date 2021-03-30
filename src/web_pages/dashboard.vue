@@ -95,7 +95,8 @@
     box-shadow:0 3px 6px 0 rgba(0,0,0,.1);
     background:#fff;
     border:1px solid transparent;
-    text-align:center;word-break:break-word;vertical-align:top;padding:24px;font-size:30px}.badge-block:hover{background:#fff;border:1px solid #0059a9}
+    text-align:center;word-break:break-word;vertical-align:top;padding:24px;font-size:30px}
+.badge-block:hover{background:#fff;border:1px solid #0059a9}
 .badge-block .badge-block__title{
     font-size:18px;
     margin-top:8px
