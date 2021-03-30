@@ -20,7 +20,8 @@ export default {
     },
     methods: {
         create_bot: function(){
-            console.log("QQQQ")
+
+            window.open(window.location.origin+"/#/new/bot")
         }
     }
 }

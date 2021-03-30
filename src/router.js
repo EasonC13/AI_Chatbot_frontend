@@ -21,6 +21,7 @@ import Dashboard from "./web_pages/dashboard.vue"
 import HomePage from "./web_pages/LandingPage.vue"
 import myBots from "./web_pages/myBots.vue"
 import myChats from "./web_pages/myChats.vue"
+import createBot from "./web_pages/createBot/createBot.vue"
 
 Vue.use(Router);
 
@@ -34,6 +35,15 @@ const router = new Router({
       path: "/dashboard",
       name: "dashboard",
       components: {default: Dashboard, header: MainNavbar, footer: MainFooter},
+      props: {
+        footer: {backgroundColor: 'black'},
+        header: {colorOnScroll: 65}
+      }
+    },
+    {
+      path: "/new/bot",
+      name: "create new bot",
+      components: {default: createBot, header: MainNavbar, footer: MainFooter},
       props: {
         footer: {backgroundColor: 'black'},
         header: {colorOnScroll: 65}
