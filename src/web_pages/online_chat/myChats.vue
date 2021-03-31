@@ -253,7 +253,7 @@ export default {
         },
         remove_bot_from_table_new_bots_list: function(item){
             this.new_bots_list = this.new_bots_list.filter(function(obj){
-                return obj["tg_username"] != item["tg_username"]
+                return obj["picture_url"] != item["picture_url"]
             })
         },
         save_changes_click: function(){
