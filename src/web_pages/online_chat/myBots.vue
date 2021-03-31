@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        My Bots Work
+        Coming Soon...
     </div>
 </template>
 <script>

@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        <div id="tables">
+        <div id="tables" v-if="user_email!=undefined">
             <div class="row">
                 <div class="col-md-12 ml-auto mr-auto">
                     <card class="card-plain">
@@ -130,7 +130,10 @@
                 </div>
             </div>
         </div>
-        
+        <div v-else class="container text-center">
+            <br>
+            <p class="h2">Please Login To Continue</p>
+        </div>
     </div>
 </template>
 <script>
@@ -188,6 +191,7 @@ export default {
             bots_list: [],
             new_bots_list: [],
             no_bot: undefined,
+            user_email: undefined,
         }
     },
     computed: {
@@ -210,7 +214,7 @@ export default {
     methods:{
         gapi_user_load: async function(){
             window.axios = axios
-            let user_email = window.user.getBasicProfile().getEmail()
+            this.user_email = window.user.getBasicProfile().getEmail()
             const event = new Event('my-chats-loaded');
             window.dispatchEvent(event);
                     
