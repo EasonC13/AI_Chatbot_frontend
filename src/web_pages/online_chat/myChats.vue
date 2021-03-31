@@ -121,8 +121,8 @@
                             </div>
                         </div>
                         <div class="col text-center">
-                            <button type="button" class='btn btn-primary' @click="save_changes_click">Save Changes</button>
-                            <button type="button" class='btn btn-primary' @click="start_chat">Start Chat</button>
+                            <button type="button" class='btn btn-primary' @click="save_changes_and_enter_chatroom">Save Changes and Go To Chatroom</button>
+                            <button type="button" class='btn btn-link' @click="save_changes_click">Save</button>
                             <button type="button" class='btn btn-link' @click="cancel">Cancel</button>
                         </div>
                         
@@ -268,7 +268,8 @@ export default {
         cancel: function(){
             window.reload()
         },
-        start_chat: function(){
+        save_changes_and_enter_chatroom: function(){
+            this.save_changes_click()
             let bots_str = Cookies.get("bots")
             let bots_list = JSON.parse(bots_str)
             if(bots_list.length>0){
