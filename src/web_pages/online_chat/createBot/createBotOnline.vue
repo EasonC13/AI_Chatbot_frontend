@@ -56,6 +56,9 @@
                             <div>
                                 <p class="h5">{{newBotName}}</p>
                             </div>
+                            <div>
+                                <p>{{upload_status}}</p>
+                            </div>
                             
                             
                             <button class="btn btn-primary"
@@ -88,6 +91,7 @@ export default {
           picture: undefined,
           newBotName: undefined,
           is_public: false,
+          upload_status: "",
       }
     },
     methods: {
@@ -116,6 +120,7 @@ export default {
         },
         finish: function(){
             let vm = this
+            vm.upload_status = "uploading the image, this might take a while..."
             var apiUrl = 'https://api.imgur.com/3/image';
             var apiKey = '78fd8589c7beb81';
             var formData = new FormData();
@@ -132,6 +137,7 @@ export default {
                 headers: headers,
                 data: formData,
             }).then(response => {
+                vm.upload_status = "upload to server..."
                 let image_url = response.data.data.link
                 let user_email = ""
                 try{
