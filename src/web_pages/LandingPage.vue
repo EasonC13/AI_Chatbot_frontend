@@ -5,8 +5,8 @@
                  style="background-image: url('img/artificial-intelligence-robots-cyborg-with-infinity-symbol.jpg')">
             </parallax>
             <div class="content-center">
-                <h1 class="title">Chat with AI</h1>
-                <h3>Anything, Anytime, Anywhere.</h3>
+                <h1 class="title">Chat with You</h1>
+                <h3>Anytime, Anywhere, Anything</h3>
                 <!-- <div class="text-center">
                     <a href="#pablo" class="btn btn-primary btn-icon  btn-round">
                         <i class="fab fa-facebook-square"></i>
@@ -23,6 +23,10 @@
         <div class="section section-about-us">
             <div class="container">
                 <div class="row">
+                    <div class="col-12">
+                        <h1>The landing page is not finished yet...</h1>
+                        <h5>Please Do Not Reference the information from this page.</h5>
+                    </div>
                     <div class="col-md-8 ml-auto mr-auto text-center">
                         <h2 class="title">Who we are?</h2>
                         <h5 class="description">According to the National Oceanic and Atmospheric Administration, Ted,
