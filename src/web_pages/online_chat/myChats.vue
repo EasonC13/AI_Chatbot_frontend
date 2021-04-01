@@ -1,15 +1,13 @@
 <template lang="">
     <div>
-        <div id="tables">
+        <div id="tables" v-if="user_email!=undefined">
             <div class="row">
                 <div class="col-md-12 ml-auto mr-auto">
                     <card class="card-plain">
                         <div class="row">
                             <div class="col-sm-12">
-                                <myChatsNoBot v-if="not_login" v-show="receiver_bot==undefined">
-                                    Not Login
-                                </myChatsNoBot>
-                                <div class="table-responsive" id="myChats_table" v-if="receiver_bot">
+                                <myChatsNoBot v-if="no_bot" v-show="receiver_bot==undefined"></myChatsNoBot>
+                                <div class="table-responsive" id="myChats_table">
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
@@ -20,37 +18,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">
-                                                    <img class="profile_img" 
-                                                    :src="get_b64_encoded_img(receiver_bot['profile_pic'])" 
-                                                    alt="Picture" />
-                                                </th>
-                                                <td>
-                                                    {{receiver_bot["display_name"]}}
-                                                </td>
-                                                <td>
-                                                    <el-tooltip content="More Info"
-                                                                :open-delay="300"
-                                                                placement="top" effect="white">
-                                                        <n-button type="info" size="sm" icon @click.native="Hi">
-                                                            <i class="now-ui-icons users_single-02" ></i>
-                                                        </n-button>
-                                                    </el-tooltip>
-                                                    <el-tooltip content="Settings"
-                                                                :open-delay="300"
-                                                                placement="top" effect="white">
-                                                        <n-button type="success" size="sm" icon>
-                                                            <i class="now-ui-icons ui-2_settings-90"></i>
-                                                        </n-button>
-                                                    </el-tooltip>
-                                                </td>
-                                            </tr>
                                             <tr v-for="(item, index) in bots_list" :key="index">
                                                 
                                                 <th scope="row">
                                                     <img class="profile_img" 
-                                                    :src="get_b64_encoded_img(item['profile_pic'])" 
+                                                    :src="item['picture_url']" 
                                                     alt="Picture" />
                                                 </th>
                                                 <td>{{item["display_name"]}}</td>
@@ -85,10 +57,9 @@
                                             </tr>
                                             <tr v-for="(item, index) in new_bots_list" :key="'newbot'+index"
                                              class="bg-light">
-                                                
                                                 <th scope="row">
                                                     <img class="profile_img" 
-                                                    :src="get_b64_encoded_img(item['profile_pic'])" 
+                                                    :src="item['picture_url']" 
                                                     alt="Picture" />
                                                 </th>
                                                 <td>{{item["display_name"]}}</td>
@@ -121,7 +92,7 @@
                                                     </el-tooltip>
                                                 </td>
                                             </tr>
-                                            <tr @click="trigger_add_new_bot" v-show="can_add_bot" v-if="receiver_bot">
+                                            <tr @click="trigger_add_new_bot" v-show="can_add_bot">
                                                 <td>-</td>
                                                 <td>-</td>
                                                 <td>
@@ -149,16 +120,20 @@
                                 </b-collapse>
                             </div>
                         </div>
-                        <div class="col text-center" v-if="receiver_bot">
-                            <button type="button" class='btn btn-primary' @click="save_changes_click">Save Changes</button>
-                            <button type="button" class='btn btn-link'>Cancel</button>
+                        <div class="col text-center">
+                            <button type="button" class='btn btn-primary' @click="save_changes_and_enter_chatroom">Save Changes and Go To Chatroom</button>
+                            <button type="button" class='btn btn-link' @click="save_changes_click">Save</button>
+                            <button type="button" class='btn btn-link' @click="cancel">Cancel</button>
                         </div>
                         
                     </card>
                 </div>
             </div>
         </div>
-        
+        <div v-else class="container text-center">
+            <br>
+            <p class="h2">Please Login To Continue</p>
+        </div>
     </div>
 </template>
 <script>
@@ -167,6 +142,9 @@ import {Table, TableColumn, Tooltip, Popover} from 'element-ui';
 import { BButton, BCard, BCollapse, VBToggle} from 'bootstrap-vue'
 import addBot from "./addBot"
 import myChatsNoBot from "./myChatsNoBot"
+
+import Cookies from "js-cookie"
+window.cookie = Cookies
 
 const axios = require('axios');
 export default {
@@ -203,50 +181,56 @@ export default {
     beforeDestroy() {
         window.removeEventListener('gapi-user-loaded', this.gapi_user_load);
     },
-    mounted: async function(){
+    mounted: function(){
+        let bots_str = Cookies.get("bots")
+        this.bots_list = JSON.parse(bots_str)
     },
     data() {
         return {
             receiver_bot: undefined,
             bots_list: [],
             new_bots_list: [],
-            not_login: undefined,
+            no_bot: undefined,
+            user_email: undefined,
         }
     },
     computed: {
         get_bots_username_list: function(){
             let out = [];
-            this.bots_list.forEach((el) => out.push(el.tg_username))
+            this.bots_list.forEach((el) => out.push(el.picture_url))
             return out
         },
         get_new_bots_list: function(){
             let out = [];
-            this.new_bots_list.forEach((el) => out.push(el.tg_username))
+            this.new_bots_list.forEach((el) => out.push(el.picture_url))
             return out
         },
         can_add_bot: function(){
             let total_len = this.bots_list.length + this.new_bots_list.length
             console.log("total_len", total_len)
-            return (total_len <= 3)
+            return (total_len <= 4)
         }
     },
     methods:{
         gapi_user_load: async function(){
             window.axios = axios
-            let user_email = window.user.getBasicProfile().getEmail()
-            axios.get(`https://chatbot.eason.tw/api/v1/get/myChats?user_email=${user_email}`)
-                .then(response => {
-                    if(response.data.message == "fail, not found a receiver bot."){
-                        this.not_login = true;
-                        console.log(response.data.message)
-                    }else{
-                        this.receiver_bot = response.data.receivers[0].receiver_bot
-                        this.bots_list = response.data.receivers[0].other_bots
-                        const event = new Event('my-chats-loaded');
-                        window.dispatchEvent(event);
-                    }
+            this.user_email = window.user.getBasicProfile().getEmail()
+            const event = new Event('my-chats-loaded');
+            window.dispatchEvent(event);
                     
-                })
+            // axios.get(`https://chatbot.eason.tw/api/webchat/get/avaliable_bot?user_email=${user_email}`)
+            //     .then(response => {
+            //         if(response.data.message == "fail, not found a receiver bot."){
+            //             this.no_bot = true;
+            //             console.log(response.data.message)
+            //         }else{
+            //             console.log(response)
+            //             this.bots_list = response.data
+            //             const event = new Event('my-chats-loaded');
+            //             window.dispatchEvent(event);
+            //         }
+                    
+            //     })
 
         },
         trigger_add_new_bot: function(){
@@ -263,46 +247,35 @@ export default {
         remove_bot_event: function(item){
             console.log("Remove BOT EVENT " , item)
             this.new_bots_list = this.new_bots_list.filter(function(obj){
-                return obj["tg_username"] != item["tg_username"]
+                return obj["picture_url"] != item["picture_url"]
             })
         },
         remove_bot_from_table_bots_list: function(item){
-            console.log("QQQQ")
             this.bots_list = this.bots_list.filter(function(obj){
-                return obj["tg_username"] != item["tg_username"]
+                return obj["picture_url"] != item["picture_url"]
             })
         },
         remove_bot_from_table_new_bots_list: function(item){
             this.new_bots_list = this.new_bots_list.filter(function(obj){
-                return obj["tg_username"] != item["tg_username"]
+                return obj["picture_url"] != item["picture_url"]
             })
         },
         save_changes_click: function(){
-            let user_email = window.user.getBasicProfile().getEmail()
-            let response_bots_username = this.get_bots_username_list
-            response_bots_username = response_bots_username.concat(this.get_new_bots_list)
-            let data = JSON.stringify({
-                    "user_email": user_email,
-                    "target_bot_username": this.receiver_bot["tg_username"],
-                    "response_bots_username": response_bots_username
-                })
-            axios({
-                method: "post",
-                url: `https://chatbot.eason.tw/api/v1/set/receiver`, 
-                header: {
-                    "accept": "application/json",
-                    'Content-Type': 'application/json'
-                },
-                data: data,
-            }).then(response => {
-                    console.log(response)
-                    if(response.data.message.includes("success")){
-                        location.reload()
-                    }else{
-                        alert(response.data.message)
-                    }
-                    // location.reload()
-                })
+            let out = this.new_bots_list
+            out = out.concat(this.bots_list)
+            Cookies.set("bots", out, { expires: 777 })
+        },
+        cancel: function(){
+            window.reload()
+        },
+        save_changes_and_enter_chatroom: function(){
+            this.save_changes_click()
+            let bots_str = Cookies.get("bots")
+            let bots_list = JSON.parse(bots_str)
+            if(bots_list.length>0){
+                window.open(window.location.origin+"/#/online/chatroom/")
+            }
+            
         }
     }
 }

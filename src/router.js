@@ -22,6 +22,9 @@ import HomePage from "./web_pages/LandingPage.vue"
 import myBots from "./web_pages/myBots.vue"
 import myChats from "./web_pages/myChats.vue"
 import createBot from "./web_pages/createBot/createBot.vue"
+import chatroom from "./web_pages/online_chat/chatroom.vue"
+import online_dashboard from "./web_pages/online_chat/dashboard.vue"
+import createBotOnline from "./web_pages/online_chat/createBot/createBotOnline.vue"
 
 Vue.use(Router);
 
@@ -29,11 +32,11 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      redirect: "/dashboard"
+      redirect: "/online/dashboard"
     },
     {
-      path: "/dashboard",
-      name: "dashboard",
+      path: "/telegram",
+      name: "telegram",
       components: {default: Dashboard, header: MainNavbar, footer: MainFooter},
       props: {
         footer: {backgroundColor: 'black'},
@@ -59,13 +62,40 @@ const router = new Router({
       }
     },
     {
+      path: "/online/chatroom/",
+      name: "online-chatroom",
+      components: {default: chatroom, header: MainNavbar},
+      props: {
+        footer: {backgroundColor: 'black'},
+        header: {colorOnScroll: 65}
+      } 
+    },
+    {
+      path: "/online/dashboard",
+      name: "online-dashboard",
+      components: {default: online_dashboard, header: MainNavbar, footer: MainFooter},
+      props: {
+        footer: {backgroundColor: 'black'},
+        header: {colorOnScroll: 65}
+      } 
+    },
+    {
+      path: "/online/newbot",
+      name: "online-newbot",
+      components: {default: createBotOnline, header: MainNavbar},
+      props: {
+        footer: {backgroundColor: 'black'},
+        header: {colorOnScroll: 65}
+      } 
+    },
+    {
       path: "/components",
       name: "components",
       components: {default: Components, header: MainNavbar, footer: MainFooter},
       props: {
         footer: {backgroundColor: 'black'},
         header: {colorOnScroll: 65}
-      }
+      } 
     },
     {
       path: "/presentation",
