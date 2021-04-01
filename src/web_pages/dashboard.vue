@@ -15,7 +15,7 @@
                     <div class="card badge-block">
                         <i class="fas fa-list"></i>
                         <p class="badge-block__title">Messages Recieve</p>
-                        <p v-text="'2560'"></p>
+                        <p v-text="'2160'"></p>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4">

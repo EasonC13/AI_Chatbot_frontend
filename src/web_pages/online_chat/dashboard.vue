@@ -37,8 +37,8 @@
             </div>
             <div class="container">
                 <ul role="tablist" class="nav justify-content-center row" id="dashboard-nav">
-                    <li class="nav-item"><a data-toggle="tab" href="#/online/dashboard#my_chats" role="tab" class="nav-link" aria-selected="true">My Chats</a></li>
-                    <li class="nav-item"><a data-toggle="tab" href="#/online/dashboard#my_bots" role="tab" class="nav-link" aria-selected="true">My Bots</a></li>
+                    <li class="nav-item"><a href="#/online/dashboard#my_chats" role="tab" class="nav-link">My Chats</a></li>
+                    <li class="nav-item"><a href="#/online/dashboard#my_bots" role="tab" class="nav-link">My Bots</a></li>
                 </ul>
                 <myChats v-if="$route.hash=='#my_chats' | $route.hash==''"></myChats>
                 <myBots v-if="$route.hash=='#my_bots'"></myBots>
