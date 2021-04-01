@@ -29,6 +29,7 @@ import createBotOnline from "./web_pages/online_chat/createBot/createBotOnline.v
 Vue.use(Router);
 
 const router = new Router({
+  mode: "hisotry",
   routes: [
     {
       path: "/",
