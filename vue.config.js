@@ -1,10 +1,10 @@
 module.exports = {
   pwa: {
     name: 'Now UI Kit PRO',
-    themeColor: '#f96332',
-    msTileColor: '#2ca8ff',
+    themeColor: '#1d085f',
+    msTileColor: '#1d085f',
     appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: '#f96332'
+    appleMobileWebAppStatusBarStyle: '#1d085f'
   },
   lintOnSave: false,
   css: {
