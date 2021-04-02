@@ -173,7 +173,7 @@ export default {
             new_bots_list: [],
             no_bot: undefined,
             user_email: undefined,
-            emotions: ["😃 Positive", "🤗 Empathic", "🥰 Lovely", "😤 Unfriendly"],
+            emotions: ["😃 Positive", "🤗 Empathic", "🥰 Lovely", "😤 Unfriendly", "😡 Angry"],
         }
     },
     computed: {
@@ -262,7 +262,7 @@ export default {
             let bots_str = Cookies.get("bots")
             let bots_list = JSON.parse(bots_str)
             if(bots_list.length>0){
-                window.open(window.location.origin+"/#/online/chatroom/")
+                window.open(window.location.origin+"/online/chatroom/")
             }
             
         },
