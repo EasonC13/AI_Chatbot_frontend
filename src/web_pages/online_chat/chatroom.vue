@@ -1,7 +1,7 @@
 <template lang="">
     <div>
         <div class="chatroom_chat_container"
-        style="background-image: url('img/telegram_chat_background.jpeg')">
+        style="background-image: url('/img/telegram_chat_background.jpeg')">
 
         <div style="height: 100vh" 
         v-if="already_messages.length + messages.length < 8"></div>
@@ -70,6 +70,17 @@
 <script>
 const axios = require('axios');
 import Cookies from "js-cookie"
+
+let emotion_map_to_chinese = {
+    "😃 Positive":"喜歡",
+    "🤗 Empathic":"悲傷",
+    "🥰 Lovely":"喜歡",
+    "😤 Unfriendly":"噁心",
+    "😡 Angry": "憤怒"
+}
+
+let API_emotion_mapping = {'其它': '0', '喜歡': '1', '悲傷': '2', '噁心': '3', '憤怒': '4', '開心': '5'}
+
 
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -140,6 +151,10 @@ export default {
                 target = document.getElementById(message.random_id)
                 target.scrollIntoView({behavior: "smooth"})
             }, 300)
+            
+            this.bots.forEach(element => {
+                console.log("EEE", element)
+            });
             axios({
                 method: "POST",
                 url: "https://chatbot.eason.tw/api/webchat/generate_response", 
