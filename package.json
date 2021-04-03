@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
-    "dev": "vue-cli-service serve --open",
+    "dev": "vue-cli-service serve --mode dev --open ",
     "build": "vue-cli-service build",
     "budev": "vue-cli-service build --mode dev",
-    "bulocal": "vue-cli-service build --mode local",
+    "bulocal": "vue-cli-service build --mode dev",
     "e2e": "vue-cli-service e2e",
     "lint": "vue-cli-service lint"
   },

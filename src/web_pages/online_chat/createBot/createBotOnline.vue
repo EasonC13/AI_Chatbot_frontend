@@ -153,7 +153,7 @@ export default {
                 }
                 axios({
                     method: "post",
-                    url: `https://chatbot.eason.tw/api/webchat/add/newbot`, 
+                    url: `${process.env.VUE_APP_API_URL}/api/webchat/add/newbot`, 
                     header: {
                         "accept": "application/json",
                         'Content-Type': 'application/json'

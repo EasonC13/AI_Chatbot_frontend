@@ -203,7 +203,7 @@ export default {
             const event = new Event('my-chats-loaded');
             window.dispatchEvent(event);
                     
-            // axios.get(`https://chatbot.eason.tw/api/webchat/get/avaliable_bot?user_email=${user_email}`)
+            // axios.get(`${process.env.VUE_APP_API_URL}/api/webchat/get/avaliable_bot?user_email=${user_email}`)
             //     .then(response => {
             //         if(response.data.message == "fail, not found a receiver bot."){
             //             this.no_bot = true;

@@ -234,7 +234,7 @@ export default {
         gapi_user_load: async function(){
             window.axios = axios
             let user_email = window.user.getBasicProfile().getEmail()
-            axios.get(`https://chatbot.eason.tw/api/v1/get/myChats?user_email=${user_email}`)
+            axios.get(`${process.env.VUE_APP_API_URL}/api/v1/get/myChats?user_email=${user_email}`)
                 .then(response => {
                     if(response.data.message == "fail, not found a receiver bot."){
                         this.not_login = true;
@@ -288,7 +288,7 @@ export default {
                 })
             axios({
                 method: "post",
-                url: `https://chatbot.eason.tw/api/v1/set/receiver`, 
+                url: `${process.env.VUE_APP_API_URL}/api/v1/set/receiver`, 
                 header: {
                     "accept": "application/json",
                     'Content-Type': 'application/json'

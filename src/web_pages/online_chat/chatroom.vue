@@ -157,7 +157,7 @@ export default {
             });
             axios({
                 method: "POST",
-                url: "https://chatbot.eason.tw/api/webchat/generate_response", 
+                url: "${process.env.VUE_APP_API_URL}/api/webchat/generate_response", 
                 headers: {
                         "accept": "application/json",
                         'Content-Type': 'application/json'
