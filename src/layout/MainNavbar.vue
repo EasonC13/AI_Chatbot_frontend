@@ -5,7 +5,7 @@
             menu-classes="ml-auto">
         <template slot-scope="{toggle, isToggled}">
                 <router-link v-popover:popover1 class="navbar-brand" to="/">
-                    AI Chatbot Dashboard
+                    Accompany AI Chat
                 </router-link>
                 <!-- <el-popover
                         ref="popover1"
