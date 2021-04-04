@@ -173,7 +173,7 @@ export default {
             new_bots_list: [],
             no_bot: undefined,
             user_email: undefined,
-            emotions: ["😃 Positive", "🤗 Empathic", "🥰 Lovely", "😤 Unfriendly", "😡 Angry"],
+            emotions: ["😃 Positive", "🤗 Empathic", "🥰 Lovely", "😤 Unfriendly", "😡 Angry", "😂 Laughing"],
         }
     },
     computed: {
