@@ -76,7 +76,8 @@ let emotion_map_to_chinese = {
     "🤗 Empathic":"悲傷",
     "🥰 Lovely":"喜歡",
     "😤 Unfriendly":"噁心",
-    "😡 Angry": "憤怒"
+    "😡 Angry": "憤怒",
+    "😂 Laughing": "開心"
 }
 
 let API_emotion_mapping = {'其它': '0', '喜歡': '1', '悲傷': '2', '噁心': '3', '憤怒': '4', '開心': '5'}
@@ -147,44 +148,45 @@ export default {
             var profile = window.user.getBasicProfile();
             let message = new Message(out_text, profile.getName(), profile.getImageUrl())
             this.messages.push(message)
+            this.scroll_to_msg(message)
+            
+            shuffle(this.bots)
+
+            this.bots.forEach(bot => {
+                console.log("EEE", bot)
+
+                let emotion_code = API_emotion_mapping[emotion_map_to_chinese[bot.emotion]] | 1
+                axios({
+                        method: "POST",
+                        url: `${process.env.VUE_APP_API_URL}/api/webchat/generate_response`, 
+                        headers: {
+                                "accept": "application/json",
+                                'Content-Type': 'application/json'
+                        },
+                        data: {
+                            email: window.user.getBasicProfile().getEmail(),
+                            text: out_text,
+                            emotion: emotion_code,
+                            response_count: 1
+                        },
+                    }).then(response => {
+                        
+                        let text = response.data.responses[0]
+                        let message = new Message(text, bot.display_name, bot.picture_url)
+                        
+                        
+                        setTimeout(()=> {
+                            this.messages.push(message)
+                            this.scroll_to_msg(message)
+                        }, Math.random()*3500)
+                    })
+            });
+        },
+        scroll_to_msg(message){
             setTimeout(()=> {
-                target = document.getElementById(message.random_id)
+                let target = document.getElementById(message.random_id)
                 target.scrollIntoView({behavior: "smooth"})
             }, 300)
-            
-            this.bots.forEach(element => {
-                console.log("EEE", element)
-            });
-            axios({
-                method: "POST",
-                url: "${process.env.VUE_APP_API_URL}/api/webchat/generate_response", 
-                headers: {
-                        "accept": "application/json",
-                        'Content-Type': 'application/json'
-                },
-                data: {
-                    email: window.user.getBasicProfile().getEmail(),
-                    text: out_text,
-                    emotion: 1,
-                    response_count: this.bots.length
-                },
-            }).then(response => {
-                console.log(response.data)
-                let bots = JSON.parse(Cookies.get("bots"))
-                shuffle(bots)
-                console.log(response.data)
-                for(let i in response.data.responses){
-                    console.log(i)
-                    let text = response.data.responses[i]
-                    console.log(text, bots[i].display_name, bots[i].picture_url)
-                    let message = new Message(text, bots[i].display_name, bots[i].picture_url)
-                    this.messages.push(message)
-                }
-                setTimeout(()=> {
-                target = document.getElementById(message.random_id)
-                target.scrollIntoView({behavior: "smooth"})
-                }, 300)
-            })
         }
     }
 }
