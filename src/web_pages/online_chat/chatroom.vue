@@ -4,7 +4,7 @@
         style="background-image: url('/img/telegram_chat_background.jpeg')">
 
         <div style="height: 100vh" 
-        v-if="already_messages.length + messages.length < 8"></div>
+        v-if="already_messages.length + messages.length < 12"></div>
         <!-- 使用 Telegram 樣式 -->
         <div class="cu chat" data-style="telegram" id="chatroom">
             <div class="message text" v-for="(item, index) in already_messages" :key="'test'+index">
@@ -243,6 +243,8 @@ export default {
     color: gray;
     }
 
+    
+
     @media screen and (max-width: 479px) {
      /* start of phone styles */
      /* It's possible to hide the image if the screen becomes too small */
@@ -250,7 +252,22 @@ export default {
         padding-bottom: 20%;
         }
         .textarea {
+            padding-top: 1vh;
             font-size: 200%;
+            height: 9vh
+        }
+    }
+
+    @media screen and (max-width: 1025px) {
+     /* start of phone styles */
+     /* It's possible to hide the image if the screen becomes too small */
+        #chatroom {
+        padding-bottom: 20%;
+        }
+        .textarea {
+            padding-top: 1vh;
+            font-size: 200%;
+            height: 9vh
         }
     }
 </style>
