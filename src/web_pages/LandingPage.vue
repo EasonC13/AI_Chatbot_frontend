@@ -2,7 +2,7 @@
     <div class="wrapper landing-page">
         <div class="page-header page-header-small">
             <parallax class="page-header-image"
-                 style="background-image: url('/img/artificial-intelligence-robots-cyborg-with-infinity-symbol.jpg')">
+                 style="background-image: url('https://i.imgur.com/HRzAb5C.jpg')">
             </parallax>
             <div class="content-center">
                 <h1 class="title">Chat with You</h1>
