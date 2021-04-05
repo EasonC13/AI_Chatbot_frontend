@@ -16,6 +16,7 @@ import ProductPage from "./pages/example-pages/ProductPage.vue";
 import ProfilePage from "./pages/example-pages/ProfilePage.vue";
 import SignUpPage from "./pages/example-pages/SignUpPage.vue";
 import Sections from "./pages/Sections.vue";
+import NotFound from "./pages/404.vue";
 
 import Dashboard from "./web_pages/dashboard.vue"
 import HomePage from "./web_pages/LandingPage.vue"
@@ -178,7 +179,13 @@ const router = new Router({
         footer: {backgroundColor: 'gray'},
         header: {colorOnScroll: 0}
       }
-    }
+    },
+    {
+      path: "*",
+      name: "404",
+      components: {default: NotFound, header: MainNavbar},
+      props: {header: {transparent: false}}
+    },
   ],
   scrollBehavior: (to, from, savedPosition) => {
     if (to.hash) {
