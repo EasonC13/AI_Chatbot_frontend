@@ -91,7 +91,7 @@ export default {
         my_chats_load: function(){
             console.log("LOAD")
             let user_email = window.user.getBasicProfile().getEmail()
-            axios.get(`https://chatbot.eason.tw/api/v1/get/avaliable_bots?user_email=${user_email}`)
+            axios.get(`${process.env.VUE_APP_API_URL}/api/v1/get/avaliable_bots?user_email=${user_email}`)
                 .then(response => {
                     console.log(response.data)
 

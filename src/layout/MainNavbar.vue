@@ -18,7 +18,7 @@
         </template>
         <template slot="navbar-menu">
             <li class="nav-item">
-                <a class="nav-link" href="/#/home">
+                <a class="nav-link" href="/home">
                 <i class="now-ui-icons objects_globe"></i>
                 <p>Home</p>
                 </a>
@@ -26,12 +26,12 @@
             
             <drop-down tag="li" title="Dashboard" icon="now-ui-icons tech_tv" class="nav-item">
                 <li class="nav-item">
-                    <nav-link to="/online/dashboard">
+                    <nav-link to="/online/dashboard#my_chats">
                     <i class="now-ui-icons ui-1_send"></i> My Chats
                 </nav-link>
                 </li>
                 
-                <nav-link to="/online/dashboard">
+                <nav-link to="/online/dashboard#my_bots">
                     <i class="now-ui-icons ui-1_send"></i> My Bots
                 </nav-link>
             </drop-down>
@@ -52,10 +52,10 @@
                       
             <drop-down tag="li" :title="' Welcome '+this.user.getBasicProfile().getEmail()"
             icon="now-ui-icons users_single-02" class="nav-item lower">
-                <nav-link to="/components">
+                <nav-link to="/">
                     <i class="now-ui-icons users_circle-08"></i>My Account
                 </nav-link>
-                <nav-link to="/components">
+                <nav-link to="/">
                     <i class="now-ui-icons ui-1_settings-gear-63"></i> Perference
                 </nav-link>
             </drop-down>

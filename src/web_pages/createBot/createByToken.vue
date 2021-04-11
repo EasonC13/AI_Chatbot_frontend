@@ -89,7 +89,7 @@ export default {
             })
             axios({
                 method: "post",
-                url: `https://chatbot.eason.tw/api/v1/get_bot_data_by_token/`, 
+                url: `${process.env.VUE_APP_API_URL}/api/v1/get_bot_data_by_token/`, 
                 header: {
                     "accept": "application/json",
                     'Content-Type': 'application/json'
@@ -119,7 +119,7 @@ export default {
             })
             axios({
                 method: "post",
-                url: `https://chatbot.eason.tw/api/v1/add_bot`, 
+                url: `${process.env.VUE_APP_API_URL}/api/v1/add_bot`, 
                 header: {
                     "accept": "application/json",
                     'Content-Type': 'application/json'

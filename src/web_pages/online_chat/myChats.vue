@@ -173,7 +173,7 @@ export default {
             new_bots_list: [],
             no_bot: undefined,
             user_email: undefined,
-            emotions: ["😃 Positive", "🤗 Empathic", "🥰 Lovely", "😤 Unfriendly"],
+            emotions: ["😃 Positive", "🤗 Empathic", "🥰 Lovely", "😤 Unfriendly", "😡 Angry", "😂 Laughing"],
         }
     },
     computed: {
@@ -203,7 +203,7 @@ export default {
             const event = new Event('my-chats-loaded');
             window.dispatchEvent(event);
                     
-            // axios.get(`https://chatbot.eason.tw/api/webchat/get/avaliable_bot?user_email=${user_email}`)
+            // axios.get(`${process.env.VUE_APP_API_URL}/api/webchat/get/avaliable_bot?user_email=${user_email}`)
             //     .then(response => {
             //         if(response.data.message == "fail, not found a receiver bot."){
             //             this.no_bot = true;
@@ -262,7 +262,7 @@ export default {
             let bots_str = Cookies.get("bots")
             let bots_list = JSON.parse(bots_str)
             if(bots_list.length>0){
-                window.open(window.location.origin+"/#/online/chatroom/")
+                window.open(window.location.origin+"/online/chatroom/")
             }
             
         },

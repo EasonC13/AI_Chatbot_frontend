@@ -42,10 +42,10 @@ const axios = require('axios');
 export default {
     name: 'addBot',
     bodyClass: 'addBot',
-    props: [
-        "already_have_bots",
-        "parent_new_bots_list"
-    ],
+    props: {
+        already_have_bots: Array,
+        parent_new_bots_list: Array,
+    },
     components: {
         BCardTitle,
         BButton,
@@ -83,12 +83,14 @@ export default {
             this.get_bots_list.forEach(item => {
                 console.log(this.get_addBot_id(item))
                 let target = document.getElementById(this.get_addBot_id(item))
-                if(this.parent_new_bots_list.includes(item.picture_url)){
-                    target.classList.add("bg-light")
-                    target.classList.add("selected")
-                }else{
-                    target.classList.remove("bg-light")
-                    target.classList.remove("selected")
+                if(target){
+                    if(this.parent_new_bots_list.includes(item.picture_url)){
+                        target.classList.add("bg-light")
+                        target.classList.add("selected")
+                    }else{
+                        target.classList.remove("bg-light")
+                        target.classList.remove("selected")
+                    }
                 }
             })
         }
@@ -97,7 +99,8 @@ export default {
         my_chats_load: function(){
             console.log("LOAD")
             let user_email = window.user.getBasicProfile().getEmail()
-            axios.get(`https://chatbot.eason.tw/api/webchat/get/avaliable_bot?user_email=${user_email}`)
+            console.log(process.env)
+            axios.get(`${process.env.VUE_APP_API_URL}/api/webchat/get/avaliable_bot?user_email=${user_email}`)
                 .then(response => {
                     console.log(response.data)
 
@@ -123,7 +126,7 @@ export default {
             return text
         },
         createNewBot(){
-            window.open(window.location.origin+"/#/online/newbot")
+            window.open(window.location.origin+"/online/newbot")
         }
     }
 }

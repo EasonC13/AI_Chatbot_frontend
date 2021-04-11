@@ -2,7 +2,7 @@
     <div class="wrapper dashboard-page">
         <div class="page-header dashboard-header">
             <parallax class="page-header-image"
-                style="background-image: url('img/artificial-intelligence-robots-cyborg-with-infinity-symbol.jpg')">
+                style="background-image: url('/img/artificial-intelligence-robots-cyborg-with-infinity-symbol.jpg')">
             </parallax>
             <div class="content-center">
                 <h1 class="title">Dashboard</h1>
@@ -37,8 +37,8 @@
             </div>
             <div class="container">
                 <ul role="tablist" class="nav justify-content-center row" id="dashboard-nav">
-                    <li class="nav-item"><a data-toggle="tab" href="#/online/dashboard#my_chats" role="tab" class="nav-link" aria-selected="true">My Chats</a></li>
-                    <li class="nav-item"><a data-toggle="tab" href="#/online/dashboard#my_bots" role="tab" class="nav-link" aria-selected="true">My Bots</a></li>
+                    <li class="nav-item"><a href="#my_chats" role="tab" class="nav-link">My Chats</a></li>
+                    <li class="nav-item"><a href="#my_bots" role="tab" class="nav-link">My Bots</a></li>
                 </ul>
                 <myChats v-if="$route.hash=='#my_chats' | $route.hash==''"></myChats>
                 <myBots v-if="$route.hash=='#my_bots'"></myBots>

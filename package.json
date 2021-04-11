@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
-    "dev": "vue-cli-service serve --open",
+    "dev": "vue-cli-service serve --mode dev --open ",
     "build": "vue-cli-service build",
+    "budev": "vue-cli-service build --mode dev",
+    "bulocal": "vue-cli-service build --mode dev",
     "e2e": "vue-cli-service e2e",
     "lint": "vue-cli-service lint"
   },
@@ -27,7 +29,7 @@
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-plugin-pwa": "^3.4.0",
-    "@vue/cli-service": "^3.4.0",
+    "@vue/cli-service": "^4.5.12",
     "babel-plugin-component": "^1.1.1",
     "jquery": "^3.6.0",
     "node-sass": "^4.14.1",
