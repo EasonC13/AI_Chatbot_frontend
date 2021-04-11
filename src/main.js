@@ -20,6 +20,8 @@ import router from "./router";
 import "./registerServiceWorker";
 //plugins
 import NowUIKit from './plugins/now-ui-kit';
+import $ from 'jquery'  //加上這句話
+Vue.prototype.$ = $;   // 當然還有這句話 給vue原型上新增 $
 
 Vue.config.productionTip = false;
 Vue.use(NowUIKit);

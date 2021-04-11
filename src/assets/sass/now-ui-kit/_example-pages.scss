@@ -234,6 +234,58 @@
     }
 }
 
+.dashboard-page{
+
+    .page-header{
+        height: 40vh;
+        position: relative;
+
+        .share{
+            margin-top: 150px;
+        }
+        h1{
+            font-weight: 600;
+        }
+        .title{
+            color: $white-color;
+        }
+    }
+
+    .section-team{
+        .team .team-player img{
+            max-width: 100px;
+        }
+
+        .team-player{
+            margin-bottom: 15px;
+        }
+    }
+
+    .section-contact-us{
+        .title{
+            margin-bottom: 15px;
+        }
+
+        .description{
+            margin-bottom: 30px;
+        }
+
+        .input-group,
+        .send-button,
+        .textarea-container{
+            padding: 0 40px;
+        }
+
+        .textarea-container{
+            margin: 40px 0;
+        }
+
+        a.btn{
+            margin-top: 35px;
+        }
+    }
+}
+
 .profile-page,
 .blog-post{
     .button-container{

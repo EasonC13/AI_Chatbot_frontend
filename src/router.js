@@ -16,14 +16,79 @@ import ProductPage from "./pages/example-pages/ProductPage.vue";
 import ProfilePage from "./pages/example-pages/ProfilePage.vue";
 import SignUpPage from "./pages/example-pages/SignUpPage.vue";
 import Sections from "./pages/Sections.vue";
+import NotFound from "./pages/404.vue";
+
+import Dashboard from "./web_pages/dashboard.vue"
+import HomePage from "./web_pages/LandingPage.vue"
+import myBots from "./web_pages/myBots.vue"
+import myChats from "./web_pages/myChats.vue"
+import createBot from "./web_pages/createBot/createBot.vue"
+import chatroom from "./web_pages/online_chat/chatroom.vue"
+import online_dashboard from "./web_pages/online_chat/dashboard.vue"
+import createBotOnline from "./web_pages/online_chat/createBot/createBotOnline.vue"
 
 Vue.use(Router);
 
 const router = new Router({
+  mode: "history",
   routes: [
     {
       path: "/",
-      redirect: "/presentation"
+      redirect: "/online/dashboard"
+    },
+    {
+      path: "/telegram",
+      name: "telegram",
+      components: {default: Dashboard, header: MainNavbar, footer: MainFooter},
+      props: {
+        footer: {backgroundColor: 'black'},
+        header: {colorOnScroll: 65}
+      }
+    },
+    {
+      path: "/new/bot",
+      name: "create new bot",
+      components: {default: createBot, header: MainNavbar, footer: MainFooter},
+      props: {
+        footer: {backgroundColor: 'black'},
+        header: {colorOnScroll: 65}
+      }
+    },
+    {
+      path: "/home",
+      name: "home",
+      components: {default: HomePage, header: MainNavbar, footer: MainFooter},
+      props: {
+        footer: {backgroundColor: 'black'},
+        header: {colorOnScroll: 65}
+      }
+    },
+    {
+      path: "/online/chatroom/",
+      name: "online-chatroom",
+      components: {default: chatroom, header: MainNavbar},
+      props: {
+        footer: {backgroundColor: 'black'},
+        header: {colorOnScroll: 65}
+      } 
+    },
+    {
+      path: "/online/dashboard",
+      name: "online-dashboard",
+      components: {default: online_dashboard, header: MainNavbar, footer: MainFooter},
+      props: {
+        footer: {backgroundColor: 'black'},
+        header: {colorOnScroll: 65}
+      } 
+    },
+    {
+      path: "/online/newbot",
+      name: "online-newbot",
+      components: {default: createBotOnline, header: MainNavbar},
+      props: {
+        footer: {backgroundColor: 'black'},
+        header: {colorOnScroll: 65}
+      } 
     },
     {
       path: "/components",
@@ -32,7 +97,7 @@ const router = new Router({
       props: {
         footer: {backgroundColor: 'black'},
         header: {colorOnScroll: 65}
-      }
+      } 
     },
     {
       path: "/presentation",
@@ -114,7 +179,13 @@ const router = new Router({
         footer: {backgroundColor: 'gray'},
         header: {colorOnScroll: 0}
       }
-    }
+    },
+    {
+      path: "*",
+      name: "404",
+      components: {default: NotFound, header: MainNavbar},
+      props: {header: {transparent: false}}
+    },
   ],
   scrollBehavior: (to, from, savedPosition) => {
     if (to.hash) {
