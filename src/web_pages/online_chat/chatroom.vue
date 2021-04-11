@@ -80,7 +80,7 @@ let emotion_map_to_chinese = {
     "😂 Laughing": "開心"
 }
 
-let API_emotion_mapping = {'其它': '0', '喜歡': '1', '悲傷': '2', '噁心': '3', '憤怒': '4', '開心': '5'}
+let API_emotion_mapping = {'其它': 0, '喜歡': 1, '悲傷': 2, '噁心': 3, '憤怒': 4, '開心': 5}
 
 
 function shuffle(array) {
@@ -117,6 +117,9 @@ export default {
     name: 'chatroom',
     bodyClass: 'chatroom',
     components: {
+    },
+    mounted() {
+        document.getElementById("chatroom_span_text_area").focus()
     },
     data() {
       return {
@@ -155,7 +158,8 @@ export default {
             this.bots.forEach(bot => {
                 console.log("EEE", bot)
 
-                let emotion_code = API_emotion_mapping[emotion_map_to_chinese[bot.emotion]] | 1
+                let emotion_code = API_emotion_mapping[emotion_map_to_chinese[bot.emotion]] || 1
+                
                 axios({
                         method: "POST",
                         url: `${process.env.VUE_APP_API_URL}/api/webchat/generate_response`, 
