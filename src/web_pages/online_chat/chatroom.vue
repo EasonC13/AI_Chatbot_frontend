@@ -44,7 +44,7 @@
                     </div>
                     <!-- 文字 -->
                     <div class="text">
-                        <p>{{message.text}}</p>
+                        <p v-for="(text, index) in message.text.split('\n')">{{text}}</p>
                     </div>
                     <!-- 中繼資料 -->
                     <div class="meta">
@@ -57,11 +57,11 @@
         </div>
         </div>
         <div id="input_area">
-            <div>
-                <span class="textarea" id="chatroom_span_text_area" role="textbox" contenteditable
-                 v-on:keyup.enter="send_msg" v-model="input_text"></span>
+            <div id="text_area">
+                <div class="textarea" id="chatroom_div_text_area" role="textbox" contenteditable
+                 ></div>
             </div>
-            <div id="send_button" @click="send_msg">
+            <div id="send_button" class="align-items-right" @click="send_msg">
                 <i class="now-ui-icons ui-1_send"></i>
             </div>
         </div>
@@ -69,7 +69,12 @@
 </template>
 <script>
 const axios = require('axios');
+const $ = require("jquery")
 import Cookies from "js-cookie"
+
+function replaceAll(string, search, replace) {
+    return string.split(search).join(replace);
+}
 
 let emotion_map_to_chinese = {
     "😃 Positive":"喜歡",
@@ -119,13 +124,21 @@ export default {
     components: {
     },
     mounted() {
-        document.getElementById("chatroom_span_text_area").focus()
+        let vm = this
+        document.getElementById("chatroom_div_text_area").focus()
+        $("#chatroom_div_text_area").keypress(function(e){
+            if(e.which == 13 && e.shiftKey){
+                
+            }else if(e.which == 13){
+                e.preventDefault()
+                vm.send_msg()
+            }
+        })
     },
     data() {
       return {
           already_messages: [],
           messages: [],
-          input_text: ""
       }
     },
     computed: {
@@ -140,12 +153,16 @@ export default {
     },
     methods: {
         send_msg: function(){
-            let target = document.getElementById("chatroom_span_text_area")
-            let out_text = target.textContent
+            let target = document.getElementById("chatroom_div_text_area")
+            let out_text = target.innerText
             if(out_text.length == 0){
                 return 0
             }
-            target.textContent = ""
+
+            var enter = String.fromCharCode(10);
+            out_text = replaceAll(out_text, enter, "\n")
+
+            target.innerText = ""
             console.log("SEND", out_text)
             
             var profile = window.user.getBasicProfile();
@@ -200,17 +217,24 @@ export default {
         height: 100%;
         padding-bottom: 11vh;
     }
+    #chatroom_div_text_area{
+        padding-top: 5px;
+        min-height: 2em;
+        line-height: 1.1;
+    }
     #input_area{
         position: fixed;
         bottom: 0px;
         width: 100%;
         background-color: white;
     }
-    #input_area > span{
-
+    #input_area > #text_area{
         width: 100%;
-        height: 10vh;
+        min-height: 10vh;
         font-size: 2em;
+    }
+    #input_area > #text_area > br{
+        padding-top: 1em;
     }
     #input_area > #send_button{
         position: absolute;
