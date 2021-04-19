@@ -9,12 +9,12 @@ import BlogPost from "./pages/example-pages/BlogPost.vue";
 import BlogPosts from "./pages/example-pages/BlogPosts.vue";
 import ContactUs from "./pages/example-pages/ContactUs.vue";
 import LandingPage from "./pages/example-pages/LandingPage.vue";
-import LoginPage from "./pages/example-pages/LoginPage.vue";
+// import LoginPage from "./pages/example-pages/LoginPage.vue";
 import PricingPage from "./pages/example-pages/PricingPage.vue";
 import EcommercePage from "./pages/example-pages/EcommercePage.vue";
 import ProductPage from "./pages/example-pages/ProductPage.vue";
 import ProfilePage from "./pages/example-pages/ProfilePage.vue";
-import SignUpPage from "./pages/example-pages/SignUpPage.vue";
+// import SignUpPage from "./pages/example-pages/SignUpPage.vue";
 import Sections from "./pages/Sections.vue";
 import NotFound from "./pages/404.vue";
 
@@ -27,6 +27,9 @@ import chatroom from "./web_pages/online_chat/chatroom.vue"
 import online_dashboard from "./web_pages/online_chat/dashboard.vue"
 import createBotOnline from "./web_pages/online_chat/createBot/createBotOnline.vue"
 
+
+import LoginPage from "./web_pages/auth/Login.vue";
+import SignUpPage from "./web_pages/auth/SignUpPage.vue";
 Vue.use(Router);
 
 const router = new Router({
