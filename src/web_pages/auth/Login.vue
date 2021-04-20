@@ -18,19 +18,26 @@
                         <fg-input class="no-border input-lg"
                                   addon-left-icon="now-ui-icons users_circle-08"
                                   v-model="form.email"
-                                  placeholder="First Name...">
+                                  placeholder="Email...">
                         </fg-input>
 
                         <fg-input class="no-border input-lg"
                                   addon-left-icon="now-ui-icons text_caps-small"
                                   v-model="form.password"
-                                  placeholder="Last Name..." type="password">
+                                  placeholder="Password..." type="password">
                         </fg-input>
-
-                        <template slot="raw-content">
-                            <div class="card-footer text-center" @click="login">
+                        <div class="card-footer text-center" @click="login">
                                 <a href="#pablo" class="btn btn-primary btn-round btn-lg btn-block">Get Started</a>
                             </div>
+                        <p class="h4">
+                              Or Sign In with Google<br><br>
+                              <button @click="socialLogin" class="social-button">
+                                <img alt="Google Logo" src="img/google_icon.png">
+                              </button>
+                            </p>
+                        <template slot="raw-content">
+                            
+                            
                             <div class="pull-left">
                                 <h6>
                                     <router-link :to="'signup'" class="link footer-link">Create Account</router-link>
@@ -42,6 +49,7 @@
                                 </h6>
                             </div>
                         </template>
+                        
                     </card>
                 </div>
             </div>
@@ -74,15 +82,38 @@
         login: function() {
         firebase.auth().signInWithEmailAndPassword(this.form.email, this.form.password).then(
           (user) => {
-            this.$router.replace('home')
+            this.$router.replace('online/dashboard')
           },
           (err) => {
             alert('Oops. ' + err.message)
           }
         );
+      },
+      socialLogin: function() {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider).then((result) => {
+          this.$router.replace('home');
+        }).catch((err) => {
+          alert('Oops. ' + err.message)
+        });
       }
     }
   }
 </script>
-<style>
+<style scoped>
+  .social-button {
+    width: 3em;
+    background: white;
+    padding: 10px;
+    border-radius: 100%;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    outline: 0;
+    border: 0;
+  }
+  .social-button:active {
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+  }
+  .social-button img {
+    width: 100%;
+  }
 </style>

@@ -73,7 +73,10 @@ const router = new Router({
       props: {
         footer: {backgroundColor: 'black'},
         header: {colorOnScroll: 65}
-      } 
+      },
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/online/dashboard",
@@ -82,7 +85,10 @@ const router = new Router({
       props: {
         footer: {backgroundColor: 'black'},
         header: {colorOnScroll: 65}
-      } 
+      },
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/online/newbot",
@@ -91,7 +97,10 @@ const router = new Router({
       props: {
         footer: {backgroundColor: 'black'},
         header: {colorOnScroll: 65}
-      } 
+      },
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/components",
@@ -123,7 +132,7 @@ const router = new Router({
     {
       path: "/login",
       name: "login",
-      components: {default: LoginPage, header: MainNavbar},
+      components: {default: LoginPage},
       props: {header: {colorOnScroll: 450}}
     },
     {
@@ -186,7 +195,8 @@ const router = new Router({
     {
       path: "*",
       name: "404",
-      components: {default: NotFound, header: MainNavbar},
+      redirect: "/",
+      //components: {default: NotFound, header: MainNavbar},
       props: {header: {transparent: false}}
     },
   ],
@@ -198,5 +208,17 @@ const router = new Router({
     }
   },
 });
+
+
+import firebase from "firebase"
+router.beforeEach((to, from, next) => {
+  const currentUser = firebase.auth().currentUser;
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  console.log(currentUser, requiresAuth)
+
+  if (requiresAuth && !currentUser) next('/login');
+  else next();
+})
+
 
 export default router;

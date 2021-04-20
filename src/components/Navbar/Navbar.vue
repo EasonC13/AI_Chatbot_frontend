@@ -60,7 +60,8 @@
     },
     provide() {
       return {
-        closeNavbar: this.close
+        closeNavbar: this.close,
+        closeDropDown: undefined
       }
     },
     components: {
