@@ -31,8 +31,12 @@
                             </div>
                         <p class="h4">
                               Or Sign In with Google<br><br>
-                              <button @click="socialLogin" class="social-button">
+                              <button @click="googleLogin" class="social-button">
                                 <img alt="Google Logo" src="img/google_icon.png">
+                              </button>
+
+                              <button @click="fbLogin" class="social-button">
+                                <img alt="FB Logo" src="img/icons/fb_icon.png">
                               </button>
                             </p>
                         <template slot="raw-content">
@@ -89,14 +93,22 @@
           }
         );
       },
-      socialLogin: function() {
-        const provider = new firebase.auth.GoogleAuthProvider();
+      socialLogin: function(provider) {
         firebase.auth().signInWithPopup(provider).then((result) => {
           this.$router.replace('home');
         }).catch((err) => {
           alert('Oops. ' + err.message)
         });
-      }
+      },
+      googleLogin: function(){
+        var provider = new firebase.auth.GoogleAuthProvider();
+        this.socialLogin(provider);
+      },
+      fbLogin: function(){
+        var provider = new firebase.auth.FacebookAuthProvider();
+        this.socialLogin(provider);
+      },
+
     }
   }
 </script>
@@ -109,6 +121,7 @@
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
     outline: 0;
     border: 0;
+    margin: 0px 5px 0px 5px
   }
   .social-button:active {
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
