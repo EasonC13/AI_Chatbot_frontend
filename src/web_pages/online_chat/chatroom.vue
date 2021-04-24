@@ -71,6 +71,7 @@
 const axios = require('axios');
 const $ = require("jquery")
 import Cookies from "js-cookie"
+import firebase from "firebase"
 
 function replaceAll(string, search, replace) {
     return string.split(search).join(replace);
@@ -142,10 +143,6 @@ export default {
       }
     },
     computed: {
-        username: function(){
-            var profile = window.user.getBasicProfile();
-            return profile.getName()
-        },
         bots: function(){
             let bots_str = Cookies.get("bots")
             return JSON.parse(bots_str)
@@ -165,8 +162,11 @@ export default {
             target.innerText = ""
             console.log("SEND", out_text)
             
-            var profile = window.user.getBasicProfile();
-            let message = new Message(out_text, profile.getName(), profile.getImageUrl())
+            var profile = firebase.auth().currentUser
+            
+            let message = new Message(out_text, profile.displayName, profile.photoURL)
+
+            console.log(profile, message)
             this.messages.push(message)
             this.scroll_to_msg(message)
             
@@ -185,7 +185,7 @@ export default {
                                 'Content-Type': 'application/json'
                         },
                         data: {
-                            email: window.user.getBasicProfile().getEmail(),
+                            email: profile.email,
                             text: out_text,
                             emotion: emotion_code,
                             response_count: 1

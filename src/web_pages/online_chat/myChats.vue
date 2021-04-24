@@ -121,6 +121,7 @@ import {Table, TableColumn, Tooltip, Popover} from 'element-ui';
 import { BDropdown, BDropdownItem, BButton, BCard, BCollapse, VBToggle} from 'bootstrap-vue'
 import addBot from "./addBot"
 import myChatsNoBot from "./myChatsNoBot"
+import firebase from "firebase"
 
 import Cookies from "js-cookie"
 window.cookie = Cookies
@@ -152,11 +153,7 @@ export default {
       'b-toggle': VBToggle,
     },
     created() {
-        if(window.user == undefined){
-            window.addEventListener('gapi-user-loaded', this.gapi_user_load);
-        }else{
-            this.gapi_user_load()
-        }
+        this.gapi_user_load()
         
     },
     beforeDestroy() {
@@ -199,9 +196,7 @@ export default {
     methods:{
         gapi_user_load: async function(){
             window.axios = axios
-            this.user_email = window.user.getBasicProfile().getEmail()
-            const event = new Event('my-chats-loaded');
-            window.dispatchEvent(event);
+            this.user_email = firebase.auth().currentUser.email
                     
             // axios.get(`${process.env.VUE_APP_API_URL}/api/webchat/get/avaliable_bot?user_email=${user_email}`)
             //     .then(response => {
