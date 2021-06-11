@@ -24,6 +24,7 @@ import myBots from "./web_pages/myBots.vue"
 import myChats from "./web_pages/myChats.vue"
 import createBot from "./web_pages/createBot/createBot.vue"
 import chatroom from "./web_pages/online_chat/chatroom.vue"
+import chatroom_trial from "./web_pages/online_chat/chatroom_trial.vue"
 import online_dashboard from "./web_pages/online_chat/dashboard.vue"
 import createBotOnline from "./web_pages/online_chat/createBot/createBotOnline.vue"
 
@@ -67,6 +68,15 @@ const router = new Router({
       path: "/online/chatroom/",
       name: "online-chatroom",
       components: {default: chatroom, header: MainNavbar},
+      props: {
+        footer: {backgroundColor: 'black'},
+        header: {colorOnScroll: 65}
+      } 
+    },
+    {
+      path: "/online/trial/chatroom/",
+      name: "online-chatroom",
+      components: {default: chatroom_trial, header: MainNavbar},
       props: {
         footer: {backgroundColor: 'black'},
         header: {colorOnScroll: 65}
