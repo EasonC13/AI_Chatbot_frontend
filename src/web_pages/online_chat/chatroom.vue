@@ -138,6 +138,7 @@ export default {
       return {
           already_messages: [],
           messages: [],
+          pending_msg: 0
       }
     },
     computed: {
@@ -159,6 +160,10 @@ export default {
             }
 
             var enter = String.fromCharCode(10);
+            if(this.pending_msg > 0){
+                alert("請等收到訊息後再發出訊息。如有錯誤請重新整理頁面\nPlease wait until you receive responses before sending the next message.\nOr try refreash the window if you encounter error.")
+                return 0
+            }
             out_text = replaceAll(out_text, enter, "\n")
 
             target.innerText = ""
@@ -175,7 +180,7 @@ export default {
                 console.log("EEE", bot)
 
                 let emotion_code = API_emotion_mapping[emotion_map_to_chinese[bot.emotion]] || 1
-                
+                this.pending_msg += 1
                 axios({
                         method: "POST",
                         url: `${process.env.VUE_APP_API_URL}/api/webchat/generate_response`, 
@@ -198,6 +203,7 @@ export default {
                         setTimeout(()=> {
                             this.messages.push(message)
                             this.scroll_to_msg(message)
+                            this.pending_msg -= 1
                         }, Math.random()*3500)
                     })
             });
