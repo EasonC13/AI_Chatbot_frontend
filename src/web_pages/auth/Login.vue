@@ -12,9 +12,19 @@
                         </div> -->
                         <div slot="header">
                             <h3>Accompany AI Chat</h3>
+                            <p class="h4">
+                              Sign In with Social Media<br><br>
+                              <button @click="googleLogin" class="social-button">
+                                <img alt="Google Logo" src="img/google_icon.png">
+                              </button>
+
+                              <button @click="fbLogin" class="social-button">
+                                <img alt="FB Logo" src="img/icons/fb_icon.png">
+                              </button>
+                            </p>
                         </div>
-
-
+                        
+                        <p class="h4">Or by your account</p>
                         <fg-input class="no-border input-lg"
                                   addon-left-icon="now-ui-icons users_circle-08"
                                   v-model="form.email"
@@ -29,27 +39,19 @@
                         <div class="card-footer text-center" @click="login">
                                 <a href="#pablo" class="btn btn-primary btn-round btn-lg btn-block">Get Started</a>
                             </div>
-                        <p class="h4">
-                              Or Sign In with Google<br><br>
-                              <button @click="googleLogin" class="social-button">
-                                <img alt="Google Logo" src="img/google_icon.png">
-                              </button>
-
-                              <button @click="fbLogin" class="social-button">
-                                <img alt="FB Logo" src="img/icons/fb_icon.png">
-                              </button>
-                            </p>
+                        
                         <template slot="raw-content">
                             
                             
                             <div class="pull-left">
                                 <h6>
-                                    <router-link :to="'signup'" class="link footer-link">Create Account</router-link>
+                                    <router-link :to="'signup'" class="link footer-link">Create Account 創建帳號</router-link>
                                 </h6>
                             </div>
                             <div class="pull-right">
                                 <h6>
-                                    <a href="#pablo" class="link footer-link">Need Help?</a>
+                                    <a href="#pablo" class="link footer-link"
+                                     onclick="alert('Please log in using social media, or log in after registering an account.\n請使用社交媒體登入，或註冊帳號後進行登入')">Need Help?</a>
                                 </h6>
                             </div>
                         </template>

@@ -12,10 +12,9 @@
                                 <i class="now-ui-icons media-2_sound-wave"></i>
                             </div>
                             <div class="description">
-                                <h5 class="info-title">Marketing</h5>
+                                <h5 class="info-title">Chatbot</h5>
                                 <p class="description">
-                                    We've created the marketing campaign of the website. It was a very interesting
-                                    collaboration.
+                                    Customizable Bots.
                                 </p>
                             </div>
                         </div>
@@ -24,10 +23,9 @@
                                 <i class="now-ui-icons media-1_button-pause"></i>
                             </div>
                             <div class="description">
-                                <h5 class="info-title">Fully Coded in HTML5</h5>
+                                <h5 class="info-title">#</h5>
                                 <p class="description">
-                                    We've developed the website with HTML5 and CSS3. The client has access to the code
-                                    using GitHub.
+                                    TBA
                                 </p>
                             </div>
                         </div>
@@ -36,9 +34,9 @@
                                 <i class="now-ui-icons users_single-02"></i>
                             </div>
                             <div class="description">
-                                <h5 class="info-title">Built Audience</h5>
+                                <h5 class="info-title">#</h5>
                                 <p class="description">
-                                    There is also a Fully Customizable CMS Admin Dashboard for this product.
+                                    TBA
                                 </p>
                             </div>
                         </div>
@@ -48,15 +46,15 @@
                             <div class="card-body">
                                 <h4 class="card-title text-center">Register By Social Media</h4>
                                 <div class="social text-center">
-                                    <n-button round icon class="btn-twitter">
-                                        <i class="fab fa-twitter"></i>
+                                    <n-button round icon class="btn-google">
+                                        <i class="fab fa-google"></i>
                                     </n-button>
-                                    <n-button round icon class="btn-dribbble">
+                                    <!-- <n-button round icon class="btn-dribbble">
                                         <i class="fab fa-dribbble"></i>
                                     </n-button>
                                     <n-button round icon class="btn-facebook">
                                         <i class="fab fa-facebook"> </i>
-                                    </n-button>
+                                    </n-button> -->
                                     <h5 class="card-description"> or register </h5>
                                 </div>
                                 <fg-input addon-left-icon="now-ui-icons ui-1_email-85"
