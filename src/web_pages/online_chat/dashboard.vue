@@ -10,7 +10,7 @@
             </div>
         </div>
         <div>
-            <div class="overview-block container align-items-center">
+            <!-- <div class="overview-block container align-items-center">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-4">
                         <div class="card badge-block">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="container">
                 <ul role="tablist" class="nav justify-content-center row" id="dashboard-nav">
                     <li class="nav-item"><a href="#my_chats" role="tab" class="nav-link">My Chats</a></li>
