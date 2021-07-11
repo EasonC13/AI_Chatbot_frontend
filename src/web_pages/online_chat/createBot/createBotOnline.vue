@@ -77,6 +77,7 @@
 </template>
 <script>
 import {Switch} from '@/components';
+import firebase from "firebase";
 const axios = require('axios');
 export default {
     name: 'createBotOnline',
@@ -141,9 +142,9 @@ export default {
                 let image_url = response.data.data.link
                 let user_email = ""
                 try{
-                    user_email = window.user.getBasicProfile().getEmail()
+                    user_email = firebase.auth().currentUser.email
                 }catch(e){
-                    user_email = "pricean01@gmail.com"
+                    user_email = "undefined"
                 }
                 let data = {
                     "creator": user_email,

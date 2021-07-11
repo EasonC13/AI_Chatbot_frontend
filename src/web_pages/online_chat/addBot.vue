@@ -36,6 +36,7 @@
 import {Card, Button, Checkbox, Comment, FormGroupInput, Pagination} from '@/components';
 import {Table, TableColumn, Tooltip, Popover} from 'element-ui';
 import { BButton, BCard, BCollapse, VBToggle, BCardTitle} from 'bootstrap-vue'
+import firebase from "firebase"
 
 const axios = require('axios');
 
@@ -57,14 +58,9 @@ export default {
       'b-toggle': VBToggle,
     },
     created() {
-        if(window.user == undefined){
-            window.addEventListener('my-chats-loaded', this.my_chats_load);
-        }else{
-            this.my_chats_load()
-        }
+        this.my_chats_load()
     },
     beforeDestroy() {
-        window.removeEventListener('my-chats-loaded', this.my_chats_load);
     },
     data() {
       return {
@@ -98,7 +94,7 @@ export default {
     methods:{
         my_chats_load: function(){
             console.log("LOAD")
-            let user_email = window.user.getBasicProfile().getEmail()
+            let user_email = firebase.auth().currentUser.email
             console.log(process.env)
             axios.get(`${process.env.VUE_APP_API_URL}/api/webchat/get/avaliable_bot?user_email=${user_email}`)
                 .then(response => {

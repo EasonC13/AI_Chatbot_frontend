@@ -2,7 +2,7 @@
     <div style="background-image: url('/img/telegram_chat_background.jpeg'); min-height: 100vh;">
         <div class="chatroom_chat_container">
 
-        <div style="height: 100vh" 
+        <div style="height: 10vh" 
         v-if="already_messages.length + messages.length < 12"></div>
         <!-- 使用 Telegram 樣式 -->
         <div class="cu chat" data-style="telegram" id="chatroom">
@@ -29,7 +29,31 @@
                     </div>
                 </div>
             </div>
-            <div :class=message.class v-for="(message, index) in messages" 
+            <div class="message text">
+                <!-- 大頭貼 -->
+                <div class="avatar">
+                    <img src="https://i.imgur.com/OGPH5eF.png"/>
+                </div>
+                <!-- 內容 -->
+                <div class="content">
+                    <!-- 傳訊者 -->
+                    <div class="author">
+                        Eason
+                    </div>
+                    <!-- 文字 -->
+                    <div class="text">
+                        <p>您好，歡迎試用。在這裡您可以隨意聊天。並體驗雞尾酒效應帶來的影響。<br>如果想要自訂機器人或情緒，請
+                            <a @click="sign_in">點我登入後繼續</a>
+                        </p>
+                    </div>
+                    <!-- 中繼資料 -->
+                    <div class="meta">
+                        <div class="item">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div :class='message.class' v-for="(message, index) in messages" 
              :key="index" :id='message.random_id'>
                 <!-- 大頭貼 -->
                 <div class="avatar">
@@ -70,9 +94,7 @@
 const axios = require('axios');
 const $ = require("jquery")
 import Cookies from "js-cookie"
-import firebase from "firebase"
 
-window.cookies = Cookies
 function replaceAll(string, search, replace) {
     return string.split(search).join(replace);
 }
@@ -111,7 +133,7 @@ function shuffle(array) {
 class Message{
     constructor(text, author, author_img) {
         this.text = text
-        var currentdate = new Date();        
+        var currentdate = new Date();
         let minute = currentdate.getMinutes()
         if(minute.length<2) minute = "0" + minute
         let hour = currentdate.getHours()
@@ -151,8 +173,32 @@ export default {
       }
     },
     computed: {
+        username: function(){
+            try{
+                var profile = window.user.getBasicProfile();
+                return profile.getName()
+            }catch(e){
+                return "試用者"
+            }
+        },
+        user_img: function(){
+            try{
+                var profile = window.user.getBasicProfile();
+                return profile.getImageUrl()
+            }catch(e){
+                return "https://i.imgur.com/pqrLeJW.png"
+            }
+        },
+        user_email: function(){
+            try{
+                var profile = window.user.getBasicProfile();
+                return profile.getEmail()
+            }catch(e){
+                return "trial_user"
+            }
+        },
         bots: function(){
-            let bots_str = Cookies.get("bots")
+            let bots_str = "[{\"display_name\":\"Annie\",\"picture_url\":\"https://i.imgur.com/3pNwzLd.jpg\",\"create_time\":\"2021-03-31T17:33:08.646000\",\"last_update\":\"2021-03-31T17:33:08.646000\",\"usage_count\":0,\"custom_response\":[],\"emotion\":\"😃 Positive\",\"is_new_bot\":false},{\"display_name\":\"Reiner\",\"picture_url\":\"https://i.imgur.com/ub1Dik7.png\",\"create_time\":\"2021-03-31T16:39:25.018000\",\"last_update\":\"2021-03-31T16:39:25.018000\",\"usage_count\":0,\"custom_response\":[],\"emotion\":\"😃 Positive\",\"is_new_bot\":false},{\"display_name\":\"米卡莎\",\"picture_url\":\"https://i.imgur.com/JV3K1bS.png\",\"create_time\":\"2021-05-16T05:47:00.109000\",\"last_update\":\"2021-05-16T05:47:00.109000\",\"usage_count\":0,\"custom_response\":[],\"emotion\":\"😃 Positive\",\"is_new_bot\":false},{\"display_name\":\"Armin\",\"picture_url\":\"https://i.imgur.com/8DwxCJE.png\",\"create_time\":\"2021-05-15T21:44:00.063000\",\"last_update\":\"2021-05-15T21:44:00.063000\",\"usage_count\":0,\"custom_response\":[],\"emotion\":\"😃 Positive\",\"is_new_bot\":false},{\"display_name\":\"Eren\",\"picture_url\":\"https://i.imgur.com/xOPQh09.png\",\"create_time\":\"2021-03-31T16:41:18.871000\",\"last_update\":\"2021-03-31T16:41:18.871000\",\"usage_count\":0,\"custom_response\":[],\"emotion\":\"😃 Positive\",\"is_new_bot\":false}]"
             return JSON.parse(bots_str)
         }
     },
@@ -174,15 +220,11 @@ export default {
             target.innerText = ""
             console.log("SEND", out_text)
             
-            var profile = firebase.auth().currentUser
-            
-            let sended_message = new Message(out_text, profile.displayName, profile.photoURL)
+            let sended_message = new Message(out_text, this.username, this.user_img)
             sended_message.setClass("message text right")
-
-            console.log(profile, sended_message)
             this.messages.push(sended_message)
             this.scroll_to_msg(sended_message)
-            
+
             shuffle(this.bots)
 
             this.bots.forEach(bot => {
@@ -190,6 +232,7 @@ export default {
 
                 let emotion_code = API_emotion_mapping[emotion_map_to_chinese[bot.emotion]] || 1
                 this.pending_msg += 1
+                
                 axios({
                         method: "POST",
                         url: `${process.env.VUE_APP_API_URL}/api/webchat/generate_response`, 
@@ -198,7 +241,7 @@ export default {
                                 'Content-Type': 'application/json'
                         },
                         data: {
-                            email: profile.email,
+                            email: this.user_email,
                             text: out_text,
                             emotion: emotion_code,
                             response_count: 1
@@ -223,6 +266,11 @@ export default {
                 let target = document.getElementById(message.random_id)
                 target.scrollIntoView({behavior: "smooth"})
             }, 300)
+        },
+        sign_in(){
+            var btn = document.getElementById("google-signin-btn")
+            btn.getElementsByTagName("div")[0].click()
+            this.$router.replace("/online/dashboard")
         }
     }
 }

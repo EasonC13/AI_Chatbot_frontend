@@ -9,12 +9,12 @@ import BlogPost from "./pages/example-pages/BlogPost.vue";
 import BlogPosts from "./pages/example-pages/BlogPosts.vue";
 import ContactUs from "./pages/example-pages/ContactUs.vue";
 import LandingPage from "./pages/example-pages/LandingPage.vue";
-import LoginPage from "./pages/example-pages/LoginPage.vue";
+// import LoginPage from "./pages/example-pages/LoginPage.vue";
 import PricingPage from "./pages/example-pages/PricingPage.vue";
 import EcommercePage from "./pages/example-pages/EcommercePage.vue";
 import ProductPage from "./pages/example-pages/ProductPage.vue";
 import ProfilePage from "./pages/example-pages/ProfilePage.vue";
-import SignUpPage from "./pages/example-pages/SignUpPage.vue";
+// import SignUpPage from "./pages/example-pages/SignUpPage.vue";
 import Sections from "./pages/Sections.vue";
 import NotFound from "./pages/404.vue";
 
@@ -24,9 +24,13 @@ import myBots from "./web_pages/myBots.vue"
 import myChats from "./web_pages/myChats.vue"
 import createBot from "./web_pages/createBot/createBot.vue"
 import chatroom from "./web_pages/online_chat/chatroom.vue"
+import chatroom_trial from "./web_pages/online_chat/chatroom_trial.vue"
 import online_dashboard from "./web_pages/online_chat/dashboard.vue"
 import createBotOnline from "./web_pages/online_chat/createBot/createBotOnline.vue"
 
+
+import LoginPage from "./web_pages/auth/Login.vue";
+import SignUpPage from "./web_pages/auth/SignUpPage.vue";
 Vue.use(Router);
 
 const router = new Router({
@@ -70,6 +74,18 @@ const router = new Router({
       props: {
         footer: {backgroundColor: 'black'},
         header: {colorOnScroll: 65}
+      },
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/online/trial/chatroom/",
+      name: "online-chatroom",
+      components: {default: chatroom_trial, header: MainNavbar},
+      props: {
+        footer: {backgroundColor: 'black'},
+        header: {colorOnScroll: 65}
       } 
     },
     {
@@ -79,7 +95,10 @@ const router = new Router({
       props: {
         footer: {backgroundColor: 'black'},
         header: {colorOnScroll: 65}
-      } 
+      },
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/online/newbot",
@@ -88,7 +107,10 @@ const router = new Router({
       props: {
         footer: {backgroundColor: 'black'},
         header: {colorOnScroll: 65}
-      } 
+      },
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/components",
@@ -120,7 +142,7 @@ const router = new Router({
     {
       path: "/login",
       name: "login",
-      components: {default: LoginPage, header: MainNavbar},
+      components: {default: LoginPage},
       props: {header: {colorOnScroll: 450}}
     },
     {
@@ -183,7 +205,8 @@ const router = new Router({
     {
       path: "*",
       name: "404",
-      components: {default: NotFound, header: MainNavbar},
+      redirect: "/",
+      //components: {default: NotFound, header: MainNavbar},
       props: {header: {transparent: false}}
     },
   ],
@@ -195,5 +218,17 @@ const router = new Router({
     }
   },
 });
+
+
+import firebase from "firebase"
+router.beforeEach((to, from, next) => {
+  const currentUser = firebase.auth().currentUser;
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  console.log(currentUser, requiresAuth)
+
+  if (requiresAuth && !currentUser) next('/login');
+  else next();
+})
+
 
 export default router;
