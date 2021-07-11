@@ -111,8 +111,12 @@ function shuffle(array) {
 class Message{
     constructor(text, author, author_img) {
         this.text = text
-        var currentdate = new Date();
-        this.time = currentdate.getHours() + ":" + currentdate.getMinutes()
+        var currentdate = new Date();        
+        let minute = currentdate.getMinutes()
+        if(minute.length<2) minute = "0" + minute
+        let hour = currentdate.getHours()
+        if(hour.length<2) hour = "0" + hour
+        this.time = hour + ":" + minute
         this.author = author
         this.author_img = author_img
         this.random_id = author_img + Math.random().toString(36).substring(7)
