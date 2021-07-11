@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-            <div class="message text" v-for="(message, index) in messages" 
+            <div :class=message.class v-for="(message, index) in messages" 
              :key="index" :id='message.random_id'>
                 <!-- 大頭貼 -->
                 <div class="avatar">
@@ -117,6 +117,9 @@ class Message{
         this.author_img = author_img
         this.random_id = author_img + Math.random().toString(36).substring(7)
     }
+    setClass(text) {
+        this.class = text;
+    }
 }
 
 export default {
@@ -169,11 +172,12 @@ export default {
             
             var profile = firebase.auth().currentUser
             
-            let message = new Message(out_text, profile.displayName, profile.photoURL)
+            let sended_message = new Message(out_text, profile.displayName, profile.photoURL)
+            sended_message.setClass("message text right")
 
-            console.log(profile, message)
-            this.messages.push(message)
-            this.scroll_to_msg(message)
+            console.log(profile, sended_message)
+            this.messages.push(sended_message)
+            this.scroll_to_msg(sended_message)
             
             shuffle(this.bots)
 
@@ -199,7 +203,8 @@ export default {
                         
                         let text = response.data.responses[0]
                         let message = new Message(text, bot.display_name, bot.picture_url)
-                        
+                        message.setClass("message text")
+                        sended_message.setClass("message text right read")
                         
                         setTimeout(()=> {
                             this.messages.push(message)

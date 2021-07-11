@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <div class="message text" v-for="(message, index) in messages" 
+            <div :class='message.class' v-for="(message, index) in messages" 
              :key="index" :id='message.random_id'>
                 <!-- 大頭貼 -->
                 <div class="avatar">
@@ -139,6 +139,9 @@ class Message{
         this.author_img = author_img
         this.random_id = author_img + Math.random().toString(36).substring(7)
     }
+    setClass(text) {
+        this.class = text;
+    }
 }
 
 export default {
@@ -213,10 +216,11 @@ export default {
             target.innerText = ""
             console.log("SEND", out_text)
             
-            let message = new Message(out_text, this.username, this.user_img)
-            this.messages.push(message)
-            this.scroll_to_msg(message)
-            
+            let sended_message = new Message(out_text, this.username, this.user_img)
+            sended_message.setClass("message text right")
+            this.messages.push(sended_message)
+            this.scroll_to_msg(sended_message)
+
             shuffle(this.bots)
 
             this.bots.forEach(bot => {
@@ -242,7 +246,8 @@ export default {
                         
                         let text = response.data.responses[0]
                         let message = new Message(text, bot.display_name, bot.picture_url)
-                        
+                        message.setClass("message text")
+                        sended_message.setClass("message text right read")
                         
                         setTimeout(()=> {
                             this.messages.push(message)
