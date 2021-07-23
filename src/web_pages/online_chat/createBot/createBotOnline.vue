@@ -16,8 +16,6 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Create New Bot</h5>
-                            <p>Please don't create chatbot with picture or name which not suitable for everyone.</p>
-                            <p>請勿新增帶有不適合的名稱或圖片的聊天機器人</p>
                             <div>
                                 <label>Name: </label>
                                 <input type="text" class="form-control" v-model="newBotName" placeholder="what is this bot's name?">
@@ -30,6 +28,10 @@
                                 id="createBotOnlineUploadPhoto" name="img" accept="image/*">
                                 <br>
                             </div>
+
+                            <small><a href="#">Please don't create chatbot with name or picture which make anyone uncomfort.</a></small>
+                            <br>
+                            <small><a href="#">請勿新增讓人不適的名稱或圖片的聊天機器人</a></small><br><br>
                             <div>
                                 <label type="">Is Public:   </label>
                                 <n-switch v-model="is_public" 
