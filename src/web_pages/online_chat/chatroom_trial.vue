@@ -253,7 +253,12 @@ export default {
                             email: this.user_email,
                             text: out_text,
                             emotion: emotion_code,
-                            response_count: 1
+                            response_count: 1,
+                            bots: [{
+                                "display_name": bot.display_name,
+                                "picture_url": bot.picture_url,
+                                "create_time": bot.create_time,
+                            }]
                         },
                     }).then(response => {
                         
