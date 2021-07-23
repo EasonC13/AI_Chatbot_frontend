@@ -58,14 +58,18 @@ const router = new Router({
         header: {colorOnScroll: 65}
       }
     },
+    // {
+    //   path: "/home",
+    //   name: "home",
+    //   components: {default: HomePage, header: MainNavbar, footer: MainFooter},
+    //   props: {
+    //     footer: {backgroundColor: 'black'},
+    //     header: {colorOnScroll: 65}
+    //   }
+    // },
     {
       path: "/home",
-      name: "home",
-      components: {default: HomePage, header: MainNavbar, footer: MainFooter},
-      props: {
-        footer: {backgroundColor: 'black'},
-        header: {colorOnScroll: 65}
-      }
+      redirect: "/online/dashboard"
     },
     {
       path: "/online/chatroom/",
