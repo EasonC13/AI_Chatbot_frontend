@@ -234,6 +234,7 @@ export default {
                             bots: [{
                                 "display_name": bot.display_name,
                                 "picture_url": bot.picture_url,
+                                "create_time": bot.create_time,
                             }]
                         },
                     }).then(response => {
