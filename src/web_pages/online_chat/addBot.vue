@@ -21,6 +21,12 @@
                             alt="Picture" />
                             <p>{{item["display_name"]}}</p>
                         </div>
+                        <div class="col-4 col-xl-1 col-sm-3 col-md-2 col-lg-2" @click="report_spam">
+                            <img class="profile_img"
+                            src="https://i.imgur.com/fZYBWiw.png" 
+                            alt="Picture" />
+                            <p>Report Spam</p>
+                        </div>
                     </div>
                 </div>
 
@@ -123,6 +129,9 @@ export default {
         },
         createNewBot(){
             window.open(window.location.origin+"/online/newbot")
+        },
+        report_spam(){
+            window.open("https://forms.gle/MozRpdtspdaoyUL59")
         }
     }
 }

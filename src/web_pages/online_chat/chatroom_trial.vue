@@ -42,9 +42,18 @@
                     </div>
                     <!-- 文字 -->
                     <div class="text">
-                        <p>您好，歡迎試用。在這裡您可以隨意聊天。並體驗雞尾酒效應帶來的影響。<br>如果想要自訂機器人或情緒，請
-                            <a @click="sign_in">點我登入後繼續</a>
+                        <p>您好，歡迎試用。在這裡您可以隨意與 AI 聊天機器人聊天。<br>如果想要自訂機器人或情緒，請
+                            <a @click="sign_in" style="text-decoration: underline" href="#">點我登入後繼續</a>
+                            <br><br>
+                            使用上有任何回饋，歡迎來填寫回饋表單，填表抽現金，幫助平台持續改進！<br>
+                            <a href="https://forms.gle/2kcaGhxJeLqqNWv89" style="text-decoration: underline" target="_blank">點我前往回饋表單</a>
                         </p>
+                        <br><br>
+                        <p>Hello, welcome to try. Here you can chat with AI chatbots.<br>
+                        If you want to customize chatbots or emotions, please <a @click="sign_in" style="text-decoration: underline" href="#">click me to login</a><br>
+                        <br><br>
+                        If you have any feedback on the platform, welcome to fill in the feedback form, fill in the form to lottery cash, and help the platform continue to improve!<br>
+                        <a href="https://forms.gle/2kcaGhxJeLqqNWv89" style="text-decoration: underline" target="_blank">Click me to the feedback form</a></p>
                     </div>
                     <!-- 中繼資料 -->
                     <div class="meta">

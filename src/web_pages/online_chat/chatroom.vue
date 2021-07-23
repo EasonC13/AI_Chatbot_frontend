@@ -29,6 +29,35 @@
                     </div>
                 </div>
             </div>
+            <div class="message text">
+                <!-- 大頭貼 -->
+                <div class="avatar">
+                    <img src="https://i.imgur.com/OGPH5eF.png"/>
+                </div>
+                <!-- 內容 -->
+                <div class="content">
+                    <!-- 傳訊者 -->
+                    <div class="author">
+                        Eason
+                    </div>
+                    <!-- 文字 -->
+                    <div class="text">
+                        <p>您好，我是平台的作者 Eason<br>
+                        使用上有任何回饋，歡迎來填寫回饋表單，填表抽現金，幫助平台持續改進！<br>
+                            <a href="https://forms.gle/2kcaGhxJeLqqNWv89" target="_blank">點我前往回饋表單</a>
+                        <br><br>
+                        If you have any feedback on the platform, welcome to fill in the feedback form, fill in the form to lottery cash, and help the platform continue to improve!<br>
+                        <a href="https://forms.gle/2kcaGhxJeLqqNWv89" style="text-decoration: underline" target="_blank">Click me to the feedback form</a></p>
+                        </p>
+                        
+                    </div>
+                    <!-- 中繼資料 -->
+                    <div class="meta">
+                        <div class="item">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div :class=message.class v-for="(message, index) in messages" 
              :key="index" :id='message.random_id'>
                 <!-- 大頭貼 -->

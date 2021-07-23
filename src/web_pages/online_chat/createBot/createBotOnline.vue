@@ -19,7 +19,8 @@
                             <div>
                                 <label>Name: </label>
                                 <input type="text" class="form-control" v-model="newBotName" placeholder="what is this bot's name?">
-                                <small id="" class="form-text text-muted">We will never share your token to anyone else. <a href="#">How to get token?</a></small>
+                                <!-- <small id="" class="form-text text-muted">We will never share your token to anyone else. <a href="#">How to get token?</a></small> -->
+                                <br>
                             </div>
                             <div>
                                 <label>Bot Photo: </label>
@@ -27,11 +28,18 @@
                                 id="createBotOnlineUploadPhoto" name="img" accept="image/*">
                                 <br>
                             </div>
+
+                            <small><a href="#">Please don't create chatbot with name or picture which make anyone uncomfort.</a></small>
+                            <br>
+                            <small><a href="#">請勿新增讓人不適的名稱或圖片的聊天機器人</a></small><br><br>
                             <div>
-                                <label type="">Is Public: </label>
+                                <label type="">Is Public:   </label>
                                 <n-switch v-model="is_public" 
                                 on-text="Yes" off-text="No"></n-switch>
-                                <small><a href="#">What is the different of public or not?</a></small>
+                                <!-- <small><a href="#">What is the different of public or not?</a></small> -->
+                                <br><small><a href="#">If Public, everyone can see and use this bot as a chat partner. If not public, only you can see and use this bot.</a></small><br>
+                                <small><a href="#">如果公開 (Public = Yes)，大家都能看到並使用此 Bot 作為聊天對象，如不公開，只有你能看到並使用此機器人（適合測試用）</a></small>
+                                
                             </div>
                             
                             <button class="btn btn-primary"
