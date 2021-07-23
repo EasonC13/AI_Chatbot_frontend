@@ -230,7 +230,11 @@ export default {
                             email: profile.email,
                             text: out_text,
                             emotion: emotion_code,
-                            response_count: 1
+                            response_count: 1,
+                            bot: {
+                                "display_name": bot.display_name,
+                                "picture_url": bot.picture_url,
+                            }
                         },
                     }).then(response => {
                         
